@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>How Xen Boots &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Code Coverage" href="code-coverage.html" />
+    <link rel="prev" title="Reducing Latency" href="../tutorials/reduce-latency.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/features/index.html">Features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How Xen Boots</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#build">Build</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#objects">Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#protocols-and-entrypoints">Protocols and entrypoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xen-gz">xen.gz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xen-efi">xen.efi</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#boot">Boot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>How Xen Boots</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/how-to/how-xen-boots.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-xen-boots">
+<h1>How Xen Boots<a class="headerlink" href="#how-xen-boots" title="Permalink to this headline">¶</a></h1>
+<p>This is an at-a-glance reference of Xen’s booting capabilities and
+expectations.</p>
+<div class="section" id="build">
+<h2>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h2>
+<p>A build of xen produces <code class="docutils literal notranslate"><span class="pre">xen.gz</span></code> and optionally <code class="docutils literal notranslate"><span class="pre">xen.efi</span></code> as final
+artefacts.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>For BIOS, Xen supports the Multiboot 1 and 2 protocols.</p></li>
+<li><p>For EFI, Xen supports Multiboot 2 with EFI extensions, and native EFI64.</p></li>
+<li><p>For virtualisation, Xen supports starting directly with the PVH boot
+protocol.</p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="objects">
+<h3>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">¶</a></h3>
+<p>To begin with, most object files are compiled and linked.  This includes the
+Multiboot 1 and 2 headers and entrypoints, including the Multiboot 2 tags for
+EFI extensions.  When <code class="docutils literal notranslate"><span class="pre">CONFIG_PVH_GUEST</span></code> is selected at build time, this
+includes the PVH entrypoint and associated ELF notes.</p>
+<p>Depending on whether the compiler supports <code class="docutils literal notranslate"><span class="pre">__attribute__((__ms_abi__))</span></code> or
+not, either an EFI stub is included which nops/fails applicable setup and
+runtime calls, or full EFI support is included.</p>
+</div>
+<div class="section" id="protocols-and-entrypoints">
+<h3>Protocols and entrypoints<a class="headerlink" href="#protocols-and-entrypoints" title="Permalink to this headline">¶</a></h3>
+<p>All headers and tags are built in <code class="docutils literal notranslate"><span class="pre">xen/arch/x86/boot/head.S</span></code></p>
+<p>The Multiboot 1 headers request aligned modules and memory information.  Entry
+is via the start of the binary image, which is the <code class="docutils literal notranslate"><span class="pre">start</span></code> symbol.  This
+entrypoint must be started in 32bit mode.</p>
+<p>The Multiboot 2 headers are more flexible, and in addition request that the
+image be loaded as high as possible below the 4G boundary, with 2M alignment.
+Entry is still via the <code class="docutils literal notranslate"><span class="pre">start</span></code> symbol as with MB1, and still in 32bit mode.</p>
+<p>Headers for the EFI MB2 extensions are also present.  These request that
+<code class="docutils literal notranslate"><span class="pre">ExitBootServices()</span></code> not be called, and register <code class="docutils literal notranslate"><span class="pre">__efi_mb2_start</span></code> as an
+alternative entrypoint, entered in 64bit mode.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">CONFIG_PVH_GUEST</span></code> was selected at build time, an Elf note is included
+which indicates the ability to use the PVH boot protocol, and registers
+<code class="docutils literal notranslate"><span class="pre">__pvh_start</span></code> as the entrypoint, entered in 32bit mode.</p>
+</div>
+<div class="section" id="xen-gz">
+<h3>xen.gz<a class="headerlink" href="#xen-gz" title="Permalink to this headline">¶</a></h3>
+<p>The objects are linked together to form <code class="docutils literal notranslate"><span class="pre">xen-syms</span></code> which is an ELF64
+executable with full debugging symbols.  <code class="docutils literal notranslate"><span class="pre">xen.gz</span></code> is formed by stripping
+<code class="docutils literal notranslate"><span class="pre">xen-syms</span></code>, then repackaging the result as an ELF32 object with a single
+load section at 2MB, and <code class="docutils literal notranslate"><span class="pre">gzip</span></code>-ing the result.  Despite the ELF32 having a
+fixed load address, its contents are relocatable.</p>
+<p>Any bootloader which unzips the binary and follows the ELF headers will place
+it at the 2M boundary and jump to <code class="docutils literal notranslate"><span class="pre">start</span></code> which is the identified entry
+point.  However, Xen depends on being entered with the MB1 or MB2 protocols,
+and will terminate otherwise.</p>
+<p>The MB2+EFI entrypoint depends on being entered with the MB2 protocol, and
+will terminate if the entry protocol is wrong, or if EFI details aren’t
+provided, or if EFI Boot Services are not available.</p>
+</div>
+<div class="section" id="xen-efi">
+<h3>xen.efi<a class="headerlink" href="#xen-efi" title="Permalink to this headline">¶</a></h3>
+<p>When a PEI-capable toolchain is found, the objects are linked together and a
+PE32+ binary is created.  It can be run directly from the EFI shell, and has
+<code class="docutils literal notranslate"><span class="pre">efi_start</span></code> as its entry symbol.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>xen.efi does contain all MB1/MB2/PVH tags included in the rest of the
+build.  However, entry via anything other than the EFI64 protocol is
+unsupported, and won’t work.</p>
+</div>
+</div>
+</div>
+<div class="section" id="boot">
+<h2>Boot<a class="headerlink" href="#boot" title="Permalink to this headline">¶</a></h2>
+<p>Xen, once loaded into memory, identifies its position in order to relocate
+system structures.  For 32bit entrypoints, this necessarily requires a call
+instruction, and therefore a stack, but none of the ABIs provide one.</p>
+<p>Overall, given that on a BIOS-based system, the IVT and BDA occupy the first
+5/16ths of the first page of RAM, with the rest free to use, Xen assumes the
+top of the page is safe to use.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="code-coverage.html" class="btn btn-neutral float-right" title="Code Coverage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../tutorials/reduce-latency.html" class="btn btn-neutral float-left" title="Reducing Latency" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

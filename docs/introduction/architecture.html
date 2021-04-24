@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Xen Architecture &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features/index.html">Features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Xen Architecture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/introduction/architecture.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="xen-architecture">
+<h1>Xen Architecture<a class="headerlink" href="#xen-architecture" title="Permalink to this headline">¶</a></h1>
+<p>Xen is type-1 hypervisor: it runs directly on the hardware, everything else in the system is running as a virtual machine on top of Xen, including Dom0, the first virtual machine. Dom0 is created by Xen, is privileged and drives the devices on the platform. Xen virtualizes CPU, memory, interrupts and timers, providing virtual machines with one or more virtual CPUs, a fraction of the memory of the system, a virtual interrupt controller and a virtual timer. Xen assigns devices such as SATA controllers and network cards to Dom0, taking care of remapping MMIO regions and IRQs. Dom0 (typically Linux, but it could also be FreeBSD or other operating systems) runs the same device drivers for these devices that would be using on a native execution.</p>
+<p>Dom0 also runs a set of drivers called paravirtualized backends to give access to disk, network, etc, to the other unprivileged virtual machines. The operating system running as DomU (unprivileged guest in Xen terminology) gets access to a set of generic virtual devices by running the corresponding paravirtualized frontend drivers. A single backend services multiple frontends. A pair of paravirtualized drivers exist for all the most common classes of devices: disk, network, console, framebuffer, mouse, keyboard, etc. They usually live in the operating system kernel, i.e. Linux. A few PV backends can also run in userspace in QEMU. The frontends connect to the backends using a simple ring protocol over a shared page in memory. Xen provides all the tools for discovery and to setup the initial communication. Xen also provides a mechanism for the frontend and the backend to share additional pages and notify each other via software interrupts.</p>
+<img alt="../_images/Xen_arch1.png" src="../_images/Xen_arch1.png" />
+<p>Even though it is the most common configuration, there is no reasons to run all the device drivers and all the paravirtualized backends in Dom0. The Xen architecture allows driver domains: unprivileged virtual machines with the only purpose of running the driver and the paravirtualized backend for one class of devices. For example you can have a disk driver domain, with the SATA controller assigned, running the driver for it and the disk paravirtualized backend. You can have a network driver domain with the network card assigned, running the driver for it and the network paravirtualized backend. As driver domains are regular unprivileged guests, they make the system more secure because they allow large pieces of code, such as the entire network stack, to run unprivileged. Even if a malicious guest manages to take over the paravirtualized network backend and the network driver domain, it would not be able to take over the entire system. Driver domains also improve isolation and resilience: the network driver domain is fully isolated from the disk driver domains and Dom0. If the network driver crashes it would not be able to take down the entire system, only the network. It is possible to reboot just the network driver domains while everything else remains online. Finally driver domains allow Xen users to disaggregate and componentize the system in ways that would not be possible otherwise. For example they allow users to run a real-time operating system alongside the main OS to drive a device that has real time constraints. They allow users to run a legacy OS to drive old devices that do not have any new drivers in modern operating systems. They allow users to separate and isolate critical functionalities from less critical ones. For example they allow to run an OS such as QNX to drive most devices on the platform alongside Android for the user interface.</p>
+<img alt="../_images/Xen_arch2.png" src="../_images/Xen_arch2.png" />
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

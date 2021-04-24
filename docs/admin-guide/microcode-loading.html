@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Microcode Loading &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Hypercall ABI" href="../reference/hypercall-abi.html" />
+    <link rel="prev" title="Code Coverage" href="../how-to/code-coverage.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/features/index.html">Features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../how-to/how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Microcode Loading</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#boot-time-microcode-loading">Boot time microcode loading</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#loading-microcode-from-a-single-file">Loading microcode from a single file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-microcode-from-a-linux-initrd">Loading microcode from a Linux initrd</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#runtime-microcode-loading">Runtime microcode loading</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Microcode Loading</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/admin-guide/microcode-loading.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="microcode-loading">
+<h1>Microcode Loading<a class="headerlink" href="#microcode-loading" title="Permalink to this headline">¶</a></h1>
+<p>Like many other pieces of hardware, CPUs themselves have errata which are
+discovered after shipping, and need to be addressed in the field.  Microcode
+can be considered as firmware for the processor, and updates are published as
+needed by the CPU vendors.</p>
+<p>Microcode is included as part of the system firmware by an OEM, and a system
+firmware update is the preferred way of obtaining updated microcode.  However,
+this is often not the most expedient way to get updates, so Xen supports
+loading microcode itself.</p>
+<p>Distros typically package microcode updates for users, and may provide hooks
+to cause microcode to be automatically loaded at boot time.  Consult your dom0
+distro guidance for microcode loading.</p>
+<p>Microcode can make almost arbitrary changes to the processor, including to
+software visible features.  This includes removing features (e.g. the Haswell
+TSX errata which necessitated disabling the feature entirely), or the addition
+of brand new features (e.g. the Spectre v2 controls to work around speculative
+execution vulnerabilities).</p>
+<div class="section" id="boot-time-microcode-loading">
+<h2>Boot time microcode loading<a class="headerlink" href="#boot-time-microcode-loading" title="Permalink to this headline">¶</a></h2>
+<p>Where possible, microcode should be loaded at boot time.  This allows the CPU
+to be updated to its eventual configuration before Xen starts making setup
+decisions based on the visible features.</p>
+<p>Xen will report during boot if it performed a microcode update:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[root@host ~]# xl dmesg | grep microcode
+(XEN) microcode: CPU0 updated from revision 0x1a to 0x25, date = 2018-04-02
+(XEN) microcode: CPU2 updated from revision 0x1a to 0x25, date = 2018-04-02
+(XEN) microcode: CPU4 updated from revision 0x1a to 0x25, date = 2018-04-02
+(XEN) microcode: CPU6 updated from revision 0x1a to 0x25, date = 2018-04-02
+</pre></div>
+</div>
+<p>The exact details printed are system and microcode specific.  After boot, the
+current microcode version can obtained from with dom0:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[root@host ~]# head /proc/cpuinfo
+processor    : 0
+vendor_id    : GenuineIntel
+cpu family   : 6
+model        : 60
+model name   : Intel(R) Xeon(R) CPU E3-1240 v3 @ 3.40GHz
+stepping     : 3
+microcode    : 0x25
+cpu MHz      : 3392.148
+cache size   : 8192 KB
+physical id  : 0
+</pre></div>
+</div>
+<div class="section" id="loading-microcode-from-a-single-file">
+<h3>Loading microcode from a single file<a class="headerlink" href="#loading-microcode-from-a-single-file" title="Permalink to this headline">¶</a></h3>
+<p>Xen handles microcode blobs in the binary form shipped by vendors, which is
+also the format which the processor accepts.  This format contains header
+information which Xen and various userspace tools can use to identify the
+correct blob for a specific CPU.</p>
+<p>Tools such as Dracut will identify the correct blob for the current CPU, which
+will be a few kilobytes, for minimal overhead during boot.</p>
+<p>Additionally, Xen is capable of handling a number of blobs concatenated
+together, and will locate the appropriate blob based on the header
+information.</p>
+<p>This option is less efficient during boot, but may be preferred in situations
+where the exact CPU details aren’t known ahead of booting (e.g. install
+media).</p>
+<p>The file containing the blob(s) needs to be accessible to Xen as early as
+possible.</p>
+<ul class="simple">
+<li><p>For multiboot/multiboot2 boots, this is achieved by loading the file as a
+multiboot module.  The <code class="docutils literal notranslate"><span class="pre">ucode=$num</span></code> command line option can be used to
+identify which multiboot module contains the microcode, including negative
+indexing to count from the end.</p></li>
+<li><p>For EFI boots, there isn’t really a concept of modules.  A microcode file
+can be specified in the EFI configuration file with <code class="docutils literal notranslate"><span class="pre">ucode=$file</span></code>.  Use of
+this mechanism will override any <code class="docutils literal notranslate"><span class="pre">ucode=</span></code> settings on the command line.</p></li>
+</ul>
+</div>
+<div class="section" id="loading-microcode-from-a-linux-initrd">
+<h3>Loading microcode from a Linux initrd<a class="headerlink" href="#loading-microcode-from-a-linux-initrd" title="Permalink to this headline">¶</a></h3>
+<p>For systems using a Linux based dom0, it usually suffices to install the
+appropriate distro package, and add <code class="docutils literal notranslate"><span class="pre">ucode=scan</span></code> to Xen’s command line.</p>
+<p>Xen is compatible with the Linux initrd microcode protocol.  The initrd is
+expected to be generated with an uncompressed CPIO archive at the beginning
+which contains contains one of these two files:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>kernel/x86/microcode/GenuineIntel.bin
+kernel/x86/microcode/AuthenticAMD.bin
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ucode=scan</span></code> command line option will cause Xen to search through all
+modules to find any CPIO archives, and search the archive for the applicable
+file.  Xen will stop searching at the first match.</p>
+</div>
+</div>
+<div class="section" id="runtime-microcode-loading">
+<h2>Runtime microcode loading<a class="headerlink" href="#runtime-microcode-loading" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If at all possible, microcode updates should be done by firmware updates,
+or at boot time.  Not all microcode updates (or parts thereof) can be
+applied at runtime.</p>
+<p>Given the proprietary nature of microcode, we are unable to make any claim
+that runtime microcode loading is risk-free.  Any runtime microcode loading
+needs adequate testing on a development instance before being rolled out to
+production systems.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">xen-ucode</span></code> utility can be used to initiate a runtime microcode load:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[root@host ~]# xen-ucode
+xen-ucode: Xen microcode updating tool
+Usage: xen-ucode &lt;microcode blob&gt;
+[root@host ~]#
+</pre></div>
+</div>
+<p>The details of microcode blobs (if even packaged to begin with) are specific
+to the dom0 distribution.  Consult your dom0 OS documentation for details.
+One example with a Linux dom0 on a Haswell system might look like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[root@host ~]# xen-ucode /lib/firmware/intel-ucode/06-3c-03
+[root@host ~]#
+</pre></div>
+</div>
+<p>It will pass the blob to Xen, which will check to see whether the blob is
+correct for the processor, and newer than the running microcode.</p>
+<p>If these checks pass, the entire system will be rendezvoused and an update
+will be initiated on all CPUs in parallel.  As with boot time loading,
+diagnostics will be put out onto the console:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[root@host ~]# xl dmesg | grep microcode
+(XEN) microcode: CPU0 updated from revision 0x1a to 0x25, date = 2018-04-02
+(XEN) microcode: CPU2 updated from revision 0x1a to 0x25, date = 2018-04-02
+(XEN) microcode: CPU4 updated from revision 0x1a to 0x25, date = 2018-04-02
+(XEN) microcode: CPU6 updated from revision 0x1a to 0x25, date = 2018-04-02
+(XEN) 4 cores are to update their microcode
+(XEN) microcode: CPU0 updated from revision 0x25 to 0x27, date = 2019-02-26
+(XEN) microcode: CPU4 updated from revision 0x25 to 0x27, date = 2019-02-26
+(XEN) microcode: CPU2 updated from revision 0x25 to 0x27, date = 2019-02-26
+(XEN) microcode: CPU6 updated from revision 0x25 to 0x27, date = 2019-02-26
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../reference/hypercall-abi.html" class="btn btn-neutral float-right" title="Hypercall ABI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../how-to/code-coverage.html" class="btn btn-neutral float-left" title="Code Coverage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

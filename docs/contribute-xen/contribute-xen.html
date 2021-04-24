@@ -1,0 +1,290 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Contributing to Xen &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Submitting Patches to Xen" href="submit-patch.html" />
+    <link rel="prev" title="Frequently Asked Questions" href="../faq/faq.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/features/index.html">Features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing to Xen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#contributing-code">Contributing Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#submitting-patches-to-the-xen-project-codebase">Submitting Patches to the Xen Project Codebase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#escalation">Escalation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-security-scanning">Code Security Scanning</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Contributing to Xen</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/contribute-xen/contribute-xen.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="contributing-to-xen">
+<h1>Contributing to Xen<a class="headerlink" href="#contributing-to-xen" title="Permalink to this headline">¶</a></h1>
+<p>There are many ways to contribute to the Xen Project.</p>
+<p>As with any open source project, providing concrete contributions will demonstrate to the project leaders that you are serious about being involved, which helps us separate the people who talk about contributing from the people who actually contribute to the project in a meaningful way. This builds trust in your work, and the people who consistently contribute good work will be given more and more responsibility.</p>
+<p>Our goal is to maintain an environment of professionalism, respect, and innovation within Xen Project development.  Please adhere to the following guidelines as you participate in the Xen Project community:</p>
+<p>Be professional in all communications. Please avoid flaming, profanity, vulgarity, SHOUTING IN ALL CAPS. Keep personal discussion for the IRC channel. There is never any reason to publicly discuss gender, ethnicity, orientation, lifestyle, or religion in our project.
+Stay on topic. If you have a comment that is not relevant to the current discussion, please start a new thread.
+Keep it legal. Please use project resources for their intended purpose.
+Don’t feed trolls. Every open project attracts unwelcome commentary from individuals trying to get a rise out of someone. When this happens, just ignore them.</p>
+<div class="section" id="contributing-code">
+<h2>Contributing Code<a class="headerlink" href="#contributing-code" title="Permalink to this headline">¶</a></h2>
+<p>Because every open source project has slightly different policies for accepting code contributions, here are some specific guidelines for contributing to The Xen Project codebase.</p>
+<p>Contributions to the Xen Project codebase follow the conventions as they are known in the Linux Kernel community. In summary, contributions are made through patches that are reviewed by the community.  The project does not require community members to sign contribution or committer agreements. We do require contributors to sign contributions using the sign-off feature of the code repository, following the same approach as the Linux Kernel does (see Developer Certificate Of Origin).</p>
+<p>In addition, each Xen Project subproject (also called team) may have its own mailing list, submission guidelines, IRC channel, and culture. Please check the team portal to learn more.</p>
+<p>The majority of our projects have some shared conventions:</p>
+<p>Before submitting a patch please read the following guides:</p>
+<ul class="simple">
+<li><p>CONTRIBUTING, COPYING, and CODING_STYLE files (these are in most, but not all our our git repositories).</p></li>
+<li><p>Guide to submitting patches via e-mail workflow. Note that XAPI, Mirage OS and XCP-ng follow a standard Github workflow.</p></li>
+<li><p>Guide to asking developer questions</p></li>
+</ul>
+<p>You can also ask questions on the <cite>xen-devel&#64;lists.xenproject.org</cite> mailing list or any of the subproject lists and irc channels.</p>
+</div>
+<div class="section" id="submitting-patches-to-the-xen-project-codebase">
+<h2>Submitting Patches to the Xen Project Codebase<a class="headerlink" href="#submitting-patches-to-the-xen-project-codebase" title="Permalink to this headline">¶</a></h2>
+<p>Please first check the submission process for the Xen Sub-Project, and send an email to the proper mailing list with [PATCH] as the first word in the subject line.  Each patch should perform a single function.  Patches sent to the mailing lists should be broken up into several email messages of less than 100KB each, with only one patch per email.</p>
+<p>Please include a description of why you want the change made (not just the “what”) and why it is important for the team to make this change. Your patch will need to include a signed-off-by tag, author’s name, and other information.</p>
+<p>For details about what to include in your patch, you should start with the patch submission documentation.</p>
+</div>
+<div class="section" id="escalation">
+<h2>Escalation<a class="headerlink" href="#escalation" title="Permalink to this headline">¶</a></h2>
+<p>In a project of this size, patches sometimes slip through the cracks. If you submitted a patch to the xen-devel mailing list or bugzilla and did not receive a response within 5 business days, please send an email to xen-devel and in the first line of that email, include this phrase “Patch escalation: no response for x days”.</p>
+<p>This is one case where you should “top post” to make sure that the escalation text is read.</p>
+</div>
+<div class="section" id="code-security-scanning">
+<h2>Code Security Scanning<a class="headerlink" href="#code-security-scanning" title="Permalink to this headline">¶</a></h2>
+<p>The Xen Project is registered with the “Coverity Scan” service which applies Coverity’s static analyser to the Open Source projects. The tool can and does find flaws in the source code which can include security issues. Currently only the Xen Project Hypervisor (i.e. xen.git) is covered by these scans. Triaging and proposing solutions for the flaws found by Coverity is a useful way in which Community members can contribute to the Xen Project.</p>
+<p>Members of the community may request access to the Coverity database. However, Coverity requires that you create an account and apply for Xen Project membership by searching for the Xen Project and then requesting to be added to the project. We typically will approve requests within a few days, but reserve rejecting requests from accounts who never engaged with the project (aka never posted to a mailing list) or which look like spam accounts.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="submit-patch.html" class="btn btn-neutral float-right" title="Submitting Patches to Xen" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../faq/faq.html" class="btn btn-neutral float-left" title="Frequently Asked Questions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

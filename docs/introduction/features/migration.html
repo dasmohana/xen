@@ -1,0 +1,437 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Migration &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="QEMU Deprivileging / dm_restrict" href="qemu-deprivilege.html" />
+    <link rel="prev" title="Live Patching" href="livepatch.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Features</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dom0less.html">Dom0less</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature-levelling.html">Feature Levelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intel_psr_cat_cdp.html">Intel Cache Allocation Technology and Code and Data Prioritization Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intel_psr_mba.html">Intel Memory Bandwidth Allocation (MBA) Feature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="livepatch.html">Live Patching</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Migration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-details">User Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#technical-details">Technical Details</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#libxl">libxl</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#areas-for-improvement">Areas for Improvement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changelog">Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-deprivilege.html">QEMU Deprivileging / dm_restrict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sched_credit.html">Credit Scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sched_credit2.html">Credit2 Scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sched_rtds.html">RTDS Scheduler</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Features</a> &raquo;</li>
+        
+      <li>Migration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/introduction/features/migration.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="migration">
+<h1>Migration<a class="headerlink" href="#migration" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Status: <strong>Supported</strong></p></li>
+<li><p>Architecture: x86</p></li>
+<li><p>Component: Toolstack</p></li>
+</ul>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Migration is a mechanism to move a virtual machine while the VM is
+running.  Live migration moves a running virtual machine between two
+physical servers, but the same mechanism can be used for non-live
+migration (pause and copy) and suspend/resume from disk.</p>
+</div>
+<div class="section" id="user-details">
+<h2>User Details<a class="headerlink" href="#user-details" title="Permalink to this headline">¶</a></h2>
+<p>No hardware requirements, although hypervisor logdirty support is
+required for live migration.</p>
+<p>From the command line, <cite>xl migrate/save/restore</cite> are the top level
+interactions. For example:</p>
+<blockquote>
+<div><p>xl create my-vm.cfg
+xl migrate my-vm localhost</p>
+</div></blockquote>
+<p>or</p>
+<blockquote>
+<div><p>xl create my-vm.cfg
+xl save my-vm /path/to/save/file
+xl restore /path/to/save/file</p>
+</div></blockquote>
+<p>Xen 4.6 sees the introduction of Migration v2.  There is no change for
+people using <cite>xl</cite>, although the <cite>libxl</cite> API has had an extension.</p>
+</div>
+<div class="section" id="technical-details">
+<h2>Technical Details<a class="headerlink" href="#technical-details" title="Permalink to this headline">¶</a></h2>
+<p>Migration is formed of several layers. <cite>libxc</cite> is responsible for the
+contents of the VM (ram, vcpus, etc) and the live migration loop, while
+<cite>libxl</cite> is responsible for items such as emulator state.</p>
+<p>The format of the migration v2 stream is specified in two documents, and
+is architecture neutral.  Compatibility with legacy streams is
+maintained via the <cite>convert-legacy-stream</cite> script which transforms a
+legacy stream into a migration v2 stream.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Documents</dt><dd><ul>
+<li><p><cite>docs/specs/libxc-migration-stream.pandoc</cite></p></li>
+<li><p><cite>docs/specs/libxl-migration-stream.pandoc</cite></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>libxc</cite></dt><dd><ul>
+<li><p><cite>tools/libxc/xc_sr_*.[hc]</cite></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>libxl</cite></dt><dd><ul>
+<li><p><cite>tools/libxl/libxl_stream_{read,write}.c</cite></p></li>
+<li><p><cite>tools/libxl/libxl_convert_callout.c</cite></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Scripts</dt><dd><ul>
+<li><p><cite>tools/python/xen/migration/*.py</cite></p></li>
+<li><p><cite>tools/python/scripts/convert-legacy-stream</cite></p></li>
+<li><p><cite>tools/python/scripts/verify-stream-v2</cite></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="libxl">
+<h3>libxl<a class="headerlink" href="#libxl" title="Permalink to this headline">¶</a></h3>
+<p>With migration v2 support, LIBXL_HAVE_SRM_V2 and LIBXL_HAVE_SRM_V1
+are introduced to indicate support.  <cite>domain_restore_params</cite> gains a new
+parameter, <cite>stream_version</cite>, which is used to distinguish between legacy and
+v2 migration streams, and hence whether legacy conversion is required.</p>
+</div>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>Hypervisor logdirty support is incompatible with hardware passthrough,
+as IOMMU faults cannot be used to track writes.</p>
+<p>While not a bug in migration specifically, VMs are very sensitive to
+changes in cpuid information, and cpuid levelling support currently has
+its issues.  Extreme care should be taken when migrating VMs between
+non-identical CPUs until the cpuid levelling improvements are complete.</p>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>Changes in libxc should be tested with every guest type (32bit PV, 64bit
+PV, HVM), while changes in libxl should test HVM guests with both
+qemu-traditional and qemu-upstream.</p>
+<p>In general, testing can be done on a single host using <cite>xl save/restore</cite> or <cite>xl migrate $VM localhost</cite>.</p>
+<p>Any changes to the conversion script should be tested in all upgrade
+scenarios, which will involve starting with VMs from Xen 4.5</p>
+</div>
+<div class="section" id="areas-for-improvement">
+<h2>Areas for Improvement<a class="headerlink" href="#areas-for-improvement" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Arm support</p></li>
+<li><p>Live looping parameters</p></li>
+</ul>
+</div>
+<div class="section" id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>x86 HVM guest physmap operations (not reflected in logdirty bitmap)</p></li>
+<li><p>x86 HVM with PoD pages (attempts to map cause PoD allocations)</p></li>
+<li><p>x86 HVM with nested-virt (no relevant information included in the
+stream)</p></li>
+<li><p>x86 PV ballooning (P2M marked dirty, target frame not marked)</p></li>
+<li><p>x86 PV P2M structure changes (not noticed, stale mappings used) for
+guests not using the linear p2m layout</p></li>
+</ul>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=RwiDeG21lrc">Xen Developer Summit 2015 Presentation [video]</a></p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">`Xen Developer Summit 2015 Presentation [slides](http://events.linuxfoundation.org/sites/events/files/slides/migv2.pdf)&gt;`__</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="changelog">
+<h2>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Date</p></th>
+<th class="head"><p>Rev
+ision</p></th>
+<th class="head"><p>Ve
+rsion</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2015
+-10-24</p></td>
+<td><p>1</p></td>
+<td><p>Xen
+4.6</p></td>
+<td><p>Document written</p></td>
+</tr>
+<tr class="row-odd"><td><p>2015
+-12-11</p></td>
+<td><p>2</p></td>
+<td><p>Xen
+4.7</p></td>
+<td><p>Support of linear p2m list</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="qemu-deprivilege.html" class="btn btn-neutral float-right" title="QEMU Deprivileging / dm_restrict" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="livepatch.html" class="btn btn-neutral float-left" title="Live Patching" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

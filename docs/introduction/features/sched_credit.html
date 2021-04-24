@@ -1,0 +1,401 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Credit Scheduler &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Credit2 Scheduler" href="sched_credit2.html" />
+    <link rel="prev" title="QEMU Deprivileging / dm_restrict" href="qemu-deprivilege.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Features</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dom0less.html">Dom0less</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature-levelling.html">Feature Levelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intel_psr_cat_cdp.html">Intel Cache Allocation Technology and Code and Data Prioritization Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intel_psr_mba.html">Intel Memory Bandwidth Allocation (MBA) Feature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="livepatch.html">Live Patching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-deprivilege.html">QEMU Deprivileging / dm_restrict</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Credit Scheduler</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-details">User Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#technical-details">Technical Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changelog">Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sched_credit2.html">Credit2 Scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sched_rtds.html">RTDS Scheduler</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Features</a> &raquo;</li>
+        
+      <li>Credit Scheduler</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/introduction/features/sched_credit.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="credit-scheduler">
+<h1>Credit Scheduler<a class="headerlink" href="#credit-scheduler" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Status: <strong>Supported</strong></p></li>
+<li><p>Component: Hypervisor</p></li>
+</ul>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Credit (also known as Credit1) is the old virtual CPU (vCPU) scheduler
+of the Xen hypervisor.</p>
+<p>It is a general purpose, weighted fair-share scheduler.</p>
+</div>
+<div class="section" id="user-details">
+<h2>User Details<a class="headerlink" href="#user-details" title="Permalink to this headline">¶</a></h2>
+<p>Xen supports multiple schedulers. Credit is no longer the default.  In
+order to use it as the Xen scheduler the following parameter should be
+passed to the hypervisor at boot:</p>
+<blockquote>
+<div><p><cite>sched=credit</cite></p>
+</div></blockquote>
+<p>Once the system is live, for creating a cpupool with Credit as its
+scheduler, either compile a cpupool configuration file, as described
+in <cite>docs/man/xlcpupool.cfg.pod.5</cite> (and as exemplified in
+<cite>tools/examples/cpupool</cite>), or use just <cite>xl</cite> directly:</p>
+<blockquote>
+<div><p>xl cpupool-create name=&quot;pool1&quot; sched=&quot;credit&quot; cpus=[4,8]</p>
+</div></blockquote>
+<p>Two kind of interactions with the scheduler are possible:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>checking or changing the global parameters, via, e.g.:</dt><dd><ul>
+<li><p><cite>xl sched-credit -s</cite></p></li>
+<li><p><cite>xl sched-credit -s -p pool1</cite></p></li>
+<li><p><cite>xl sched-credit -s -t 20</cite></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>checking or changing a VM’s scheduling parameters, via, e.g.:</dt><dd><ul>
+<li><p><cite>xl sched-credit -d vm1</cite></p></li>
+<li><p><cite>xl sched-credit -d vm1 -w 512</cite></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="technical-details">
+<h2>Technical Details<a class="headerlink" href="#technical-details" title="Permalink to this headline">¶</a></h2>
+<p>Implementation entirely lives in the hypervisor. Xen has a pluggable,
+hook based, architecture for schedulers. Thanks to this, Credit code
+is all contained in <cite>xen/common/sched_credit.c</cite>.</p>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>In Credit, a vCPU has a priority, a status (i.e., active or inactive),
+a weight and some credits… and all these things interact in a rather
+involved way. Also, with years of use, things have gotten even more
+complex (due to, e.g., the introduction of boosting, caps and vCPU
+soft-affinity).</p>
+<p>Dealing with such complexity is starting to be an issue. Odd behavior
+or subtle scheduling anomalies, that is not always possible to act upon,
+have been identified already. [1][2][3]</p>
+<p>A certain lack of scalability and difficulties and weakness in dealing
+with mixed workloads and VMs with low latency requirements are other
+known problems. [4] For all these reasons, effort is ongoing to have
+Credit2 become the new default scheduler.</p>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>Any change to Credit code must to be tested by doing at least the following:</p>
+<ul class="simple">
+<li><p>create a few virtual machine and verify that they boot and can
+run some basic workload (e.g., login into them and run simple commands),</p></li>
+<li><p>shutdown/reboot the virtual machines,</p></li>
+<li><p>shutdown the system.</p></li>
+</ul>
+<p>Ideally, all the above steps should <strong>also</strong> be performed in a configuration
+that includes cpupools, better if with pools using different schedulers, and
+by also doing the following:</p>
+<ul class="simple">
+<li><p>move the virtual machines between cpupools.</p></li>
+</ul>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://lists.xenproject.org/archives/html/xen-devel/2014-07/msg01848.html">Potential non-ideal behavior on hyperthreaded systems</a></p></li>
+<li><p><a class="reference external" href="https://lists.xen.org/archives/html/xen-devel/2015-10/msg02851.html">Long standing BOOST vs. migration bug</a></p></li>
+<li><p><a class="reference external" href="https://lists.xenproject.org/archives/html/xen-devel/2016-05/msg01362.html">Priority handling issues</a></p></li>
+<li><p><a class="reference external" href="http://www-archive.xenproject.org/files/xensummit_intel09/George_Dunlap.pdf">“Scheduler development update”, XenSummit Asia 2009 [whitepaper]</a></p></li>
+<li><p><a class="reference external" href="http://events.linuxfoundation.org/sites/events/files/slides/Faggioli_XenSummit.pdf">“Scheduling in Xen” [XPDS15 Presentation]</a></p></li>
+<li><p><a class="reference external" href="https://wiki.xenproject.org/wiki/Credit_Scheduler">“The Credit Scheduler” [on the Xen-Project wiki]</a></p></li>
+<li><p><a class="reference external" href="https://wiki.xenproject.org/wiki/Xen_Project_Schedulers">“Xen Project Schedulers” [on the Xen-Project wiki]</a></p></li>
+</ul>
+</div>
+<div class="section" id="changelog">
+<h2>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Date</p></th>
+<th class="head"><p>Rev
+ision</p></th>
+<th class="head"><p>Ve
+rsion</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2016
+-10-14</p></td>
+<td><p>1</p></td>
+<td><p>Xen
+4.8</p></td>
+<td><p>Document written</p></td>
+</tr>
+<tr class="row-odd"><td><p>201
+9-02-7</p></td>
+<td><p>3</p></td>
+<td><p>Xen
+4.12</p></td>
+<td><p>No longer default scheduler</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="sched_credit2.html" class="btn btn-neutral float-right" title="Credit2 Scheduler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="qemu-deprivilege.html" class="btn btn-neutral float-left" title="QEMU Deprivileging / dm_restrict" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

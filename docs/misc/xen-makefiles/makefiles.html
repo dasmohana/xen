@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Xen Makefiles &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/features/index.html">Features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Xen Makefiles</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/misc/xen-makefiles/makefiles.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="xen-makefiles">
+<h1>Xen Makefiles<a class="headerlink" href="#xen-makefiles" title="Permalink to this headline">¶</a></h1>
+<p>Documentation for the build system of Xen, found in xen.git/xen/.</p>
+<div class="section" id="makefile-files">
+<h2>Makefile files<a class="headerlink" href="#makefile-files" title="Permalink to this headline">¶</a></h2>
+<p>Description of the syntax that can be used in most Makefiles named
+‘Makefile’. (‘xen/Makefile’ isn’t part of the description.)</p>
+<p>‘Makefile’s are consumed by ‘Rules.mk’ when building.</p>
+<div class="section" id="goal-definitions">
+<h3>Goal definitions<a class="headerlink" href="#goal-definitions" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Goal definitions are the main part (heart) of the Makefile.
+These lines define the files to be built, any special compilation
+options, and any subdirectories to be entered recursively.</p>
+<p>The most simple makefile contains one line:</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>obj-y += foo.o
+</pre></div>
+</div>
+<p>This tells the build system that there is one object in that
+directory, named foo.o. foo.o will be built from foo.c or foo.S.</p>
+<p>The following pattern is often used to have object selected
+depending on the configuration:</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>obj-$(CONFIG_FOO) += foo.o
+</pre></div>
+</div>
+<p>$(CONFIG_FOO) can evaluates to y.
+If CONFIG_FOO is not y, then the file will not be compiled nor linked.</p>
+</div></blockquote>
+</div>
+<div class="section" id="descending-down-in-directories">
+<h3>Descending down in directories<a class="headerlink" href="#descending-down-in-directories" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>A Makefile is only responsible for building objects in its own
+directory. Files in subdirectories should be taken care of by
+Makefiles in these subdirs. The build system will automatically
+invoke make recursively in subdirectories, provided you let it know of
+them.</p>
+<p>To do so, obj-y is used.
+acpi lives in a separate directory, and the Makefile present in
+drivers/ tells the build system to descend down using the following
+assignment.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#drivers/Makefile
+obj-$(CONFIG_ACPI) += acpi/
+</pre></div>
+</div>
+<p>If CONFIG_ACPI is set to ‘y’
+the corresponding obj- variable will be set, and the build system
+will descend down in the apci directory.
+The build system only uses this information to decide that it needs
+to visit the directory, it is the Makefile in the subdirectory that
+specifies what is modular and what is built-in.</p>
+<p>It is good practice to use a <cite>CONFIG_</cite> variable when assigning directory
+names. This allows the build system to totally skip the directory if the
+corresponding <cite>CONFIG_</cite> option is ‘y’.</p>
+</div></blockquote>
+</div>
+<div class="section" id="compilation-flags">
+<h3>Compilation flags<a class="headerlink" href="#compilation-flags" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl>
+<dt>CFLAGS-y and AFLAGS-y</dt><dd><p>These two flags apply only to the makefile in which they
+are assigned. They are used for all the normal cc, as and ld
+invocations happening during a recursive build.</p>
+<p>$(CFLAGS-y) is necessary because the top Makefile owns the
+variable $(XEN_CFLAGS) and uses it for compilation flags for the
+entire tree. And the variable $(CFLAGS) is modified by Config.mk
+which evaluated in every subdirs.</p>
+<p>CFLAGS-y specifies options for compiling with $(CC).
+AFLAGS-y specifies assembler options.</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="build-system-infrastructure">
+<h2>Build system infrastructure<a class="headerlink" href="#build-system-infrastructure" title="Permalink to this headline">¶</a></h2>
+<p>This chapter describe some of the macro used when building Xen.</p>
+<div class="section" id="macros">
+<h3>Macros<a class="headerlink" href="#macros" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl>
+<dt>if_changed</dt><dd><p>if_changed is the infrastructure used for the following commands.</p>
+<p>Usage:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>target: source(s) FORCE
+        $(call if_changed,ld/objcopy/...)
+</pre></div>
+</div>
+<p>When the rule is evaluated, it is checked to see if any files
+need an update, or the command line has changed since the last
+invocation. The latter will force a rebuild if any options
+to the executable have changed.
+Any target that utilises if_changed must be listed in $(targets),
+otherwise the command line check will fail, and the target will
+always be built.
+if_changed may be used in conjunction with custom commands as
+defined in “Custom commands”.</p>
+<p>Note: It is a typical mistake to forget the FORCE prerequisite.
+Another common pitfall is that whitespace is sometimes
+significant; for instance, the below will fail (note the extra space
+after the comma):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>target: source(s) FORCE
+</pre></div>
+</div>
+<p><strong>WRONG!</strong>      $(call if_changed, ld/objcopy/…)</p>
+<dl class="simple">
+<dt>Note:</dt><dd><p>if_changed should not be used more than once per target.
+It stores the executed command in a corresponding .cmd file
+and multiple calls would result in overwrites and unwanted
+results when the target is up to date and only the tests on
+changed commands trigger execution of commands.</p>
+</dd>
+</dl>
+</dd>
+<dt>ld</dt><dd><p>Link target.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>targets += setup setup.o bootsect bootsect.o
+$(obj)/setup $(obj)/bootsect: %: %.o FORCE
+        $(call if_changed,ld)
+</pre></div>
+</div>
+<p>$(targets) are assigned all potential targets, by which the build
+system knows the targets and will:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>check for commandline changes</p></li>
+</ol>
+</div></blockquote>
+<p>The “: %: %.o” part of the prerequisite is a shorthand that
+frees us from listing the setup.o and bootsect.o files.</p>
+<dl class="simple">
+<dt>Note:</dt><dd><p>It is a common mistake to forget the “targets :=” assignment,
+resulting in the target file being recompiled for no
+obvious reason.</p>
+</dd>
+</dl>
+</dd>
+<dt>objcopy</dt><dd><p>Copy binary. Uses OBJCOPYFLAGS usually specified in
+arch/$(ARCH)/Makefile.</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="custom-commands">
+<h3>Custom commands<a class="headerlink" href="#custom-commands" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>When the build system is executing with V=0, then only
+a shorthand of a command is normally displayed.
+To enable this behaviour for custom commands, two variables are
+required to be set:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>quiet_cmd_&lt;command&gt;     - what shall be echoed
+      cmd_&lt;command&gt;     - the command to execute
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># xsm/flask/Makefile
+mkflask := policy/mkflask.sh
+quiet_cmd_mkflask = MKFLASK $@
+cmd_mkflask = $(CONFIG_SHELL) $(mkflask) $(AWK) include \
+        $(FLASK_H_DEPEND)
+
+include/flask.h: $(FLASK_H_DEPEND) $(mkflask) FORCE
+        $(call if_changed,mkflask)
+</pre></div>
+</div>
+<p>When updating the include/flask.h target, the line:</p>
+<blockquote>
+<div><p>MKFLASK include/flask.h</p>
+</div></blockquote>
+<p>will be displayed with “make V=0”. (V=0 is the default)</p>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

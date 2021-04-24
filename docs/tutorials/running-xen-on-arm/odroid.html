@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Xen Arm with Virtualization Extensions/OdroidXU &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Xen Arm with Virtualization Extensions/qemu-system-aarch64" href="qemu.html" />
+    <link rel="prev" title="Xen Arm with Virtualization Extensions/Midway" href="midway.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/features/index.html">Features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="arndale.html">Xen Arm with Virtualization Extensions/Arndale</a></li>
+<li class="toctree-l1"><a class="reference internal" href="midway.html">Xen Arm with Virtualization Extensions/Midway</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Xen Arm with Virtualization Extensions/OdroidXU</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#preparing-the-board">Preparing the Board</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-xen">Building Xen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-a-device-tree-for-xen-linux-dom0-kernel-and-modules">Building a Device Tree for Xen, Linux Dom0 Kernel, and Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#booting-from-sd-emmc-card">Booting from SD/eMMC Card</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#console-login-prompt">Console Login Prompt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#building-a-linux-domu-kernel">Building a Linux DomU Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="qemu.html">Xen Arm with Virtualization Extensions/qemu-system-aarch64</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/how-xen-boots.html">How Xen Boots</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/imagebuilder.html">ImageBuilder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/xen-arm-debug.html">Xen Arm Debug Hypercalls</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Xen Arm with Virtualization Extensions/OdroidXU</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/tutorials/running-xen-on-arm/odroid.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="xen-arm-with-virtualization-extensions-odroidxu">
+<h1>Xen Arm with Virtualization Extensions/OdroidXU<a class="headerlink" href="#xen-arm-with-virtualization-extensions-odroidxu" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="preparing-the-board">
+<h2>Preparing the Board<a class="headerlink" href="#preparing-the-board" title="Permalink to this headline">¶</a></h2>
+<p>The bootloader provided with the OdroidXU does not let Xen boot in hypervisor mode. In the Odroid forums for the XU, one is likely to see many U-Boot blobs (bl1/bl2/tzsw/u-boot) which could possibly be used to let Xen boot in hypervisor mode. To avoid multiple sources, currently a single source is provided which can be accessed from <a class="reference external" href="https://github.com/suriyanr/linux-xen/tree/odroid-3.13.y/sd_fuse">https://github.com/suriyanr/linux-xen/tree/odroid-3.13.y/sd_fuse</a>.</p>
+<p>The <cite>sd_fusing.sh</cite> script found therein can be used to fuse the SD card or eMMC card with the required BL1/BL2/TZSW and U-Boot.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sd_fusing.sh /dev/mmcblk0
+</pre></div>
+</div>
+<p>Ensure <cite>/dev/mmcblk0</cite> is the correct device which represents the SD card or eMMC card that you will be using. This will let XEN boot in hypervisor mode as well as set CNTFRQ through the trustzone. This is required for domUs to get the correct timer frequency. (dom0’s optionally can pick it up from the device tree)</p>
+</div>
+<div class="section" id="building-xen">
+<h2>Building Xen<a class="headerlink" href="#building-xen" title="Permalink to this headline">¶</a></h2>
+<p>Follow Build Xen on Arm to build Xen. For more verbose debug messages from XEN, it is worthwhile to compile Xen as below:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make dist-xen XEN_TARGET_ARCH=arm32 debug=y CONFIG_EARLY_PRINTK=exynos5250
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently, Xen cannot build an uImage for U-Boot. You can create the image with:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mkimage -A arm -T kernel -a 0x80200000 -e 0x80200000 -C none -d &quot;$xen_src/xen/xen&quot; xen4.5-uImage
+</pre></div>
+</div>
+<p>where, <cite>$xen_src</cite> is the root directory of your xen git.</p>
+</div>
+</div>
+<div class="section" id="building-a-device-tree-for-xen-linux-dom0-kernel-and-modules">
+<h2>Building a Device Tree for Xen, Linux Dom0 Kernel, and Modules<a class="headerlink" href="#building-a-device-tree-for-xen-linux-dom0-kernel-and-modules" title="Permalink to this headline">¶</a></h2>
+<p>We will build Linux for dom0 to have a device tree to provide to Xen. You can get a tree from [1] which contains a working configuration for the Odroid XU.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone -b odroid-3.13.y https://github.com/suriyanr/linux-xen.git --depth=1
+cd linux-xen
+make ARCH=arm CROSS_COMPILE=$CROSS_COMPILE odroidxu_xen_defconfig
+make ARCH=arm CROSS_COMPILE=$CROSS_COMPILE zImage
+make ARCH=arm CROSS_COMPILE=$CROSS_COMPILE dtbs
+# Note that CROSS_COMPILE has to be set appropriately or can be left unset if building natively.
+</pre></div>
+</div>
+<p>The device tree used by the OdroidXU is located in arch/arm/boot/dts/exynos5410-odroidxu.dtb</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Now build the dom0 modules
+make ARCH=arm CROSS_COMPILE=$CROSS_COMPILE modules
+# And install them
+make ARCH=arm CROSS_COMPILE=$CROSS_COMPILE INSTALL_MOD_PATH=/media/suriyan/rootfs modules_install
+</pre></div>
+</div>
+<p>Note that /media/suriyan/rootfs is where the rootfs of the Odroid XU is mounted in the build box. Your path might vary or you will have to mount it appropriately.</p>
+</div>
+<div class="section" id="booting-from-sd-emmc-card">
+<h2>Booting from SD/eMMC Card<a class="headerlink" href="#booting-from-sd-emmc-card" title="Permalink to this headline">¶</a></h2>
+<p>Start with a distribution that you like, say xubuntu 14.04lts from <a class="reference external" href="http://odroid.in/ubuntu_14.04lts/ubuntu-14.04lts-xubuntu-odroid-xu-20140714.img.xz">http://odroid.in/ubuntu_14.04lts/ubuntu-14.04lts-xubuntu-odroid-xu-20140714.img.xz</a>, or ArchLinuxArm, if you prefer from <a class="reference external" href="http://archlinuxarm.org/platforms/armv7/samsung/odroid-xu">http://archlinuxarm.org/platforms/armv7/samsung/odroid-xu</a>.</p>
+<p>Once you have imaged the SD card or eMMC card with your preferred distribution, overwrite the BL1/BL2/TZSW/U-Boot as mentioned in ref:: Preparing the Board.</p>
+<p>Both the distributions mentioned above have a VFAT partition as the first partition. We shall use this partition to populate the XEN specific images - xen4.5-uImage, zImage, exynos5410-odroidxu.dtb - under a directory called <cite>xen</cite>. This is so we avoid overwriting the files that come with the default distribution in case we want to revert back the XEN changes.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>suriyan@Stealth:/media/suriyan/BOOT$ ls -l xen
+...
+-rw-r--r-- 1 suriyan suriyan   40467 Dec  8 14:04 exynos5410-odroidxu.dtb
+-rw-r--r-- 1 suriyan suriyan  689052 Dec  8 15:15 xen4.5-uImage
+-rw-r--r-- 1 suriyan suriyan 4709392 Dec  8 14:04 zImage
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The file sizes that you have might be different. The purpose here is to show the directory and the names of the files therein.</p>
+</div>
+<p>Rename the original boot.ini file in the VFAT partition to <cite>boot.ini.org</cite>. Copy the <cite>boot.ini</cite> found in <a class="reference external" href="https://github.com/suriyanr/linux-xen/blob/odroid-3.13.y/sd_fuse/boot.ini">https://github.com/suriyanr/linux-xen/blob/odroid-3.13.y/sd_fuse/boot.ini</a> in its place.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This <cite>boot.ini</cite> assumes that the rootfs resides in <cite>/dev/mmcblk0p2</cite>. If you have planned it elsewhere, change this value in the line which looks like the below appropriately.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>setenv dom0_bootargs vmalloc=256M console=hvc0 psci=enable earlyprintk debug clk_ignore_unused root=/dev/mmcblk0p2 rootwait rw drm_kms_helper.edid_firmware=edid/1920x1080.fw video=HDMI-A-1:1920x1080MR-32@60
+</pre></div>
+</div>
+</div>
+<p>Now we can plug the SD/eMMC card to the OdroidXU and boot it up.</p>
+<div class="section" id="console-login-prompt">
+<h3>Console Login Prompt<a class="headerlink" href="#console-login-prompt" title="Permalink to this headline">¶</a></h3>
+<p>hvc0 is used as the console by Xen. You will notice that <cite>console=hvc0</cite> is passed as the kernel boot parameter (will be the same for domU kernel as well).</p>
+<p>To get a login prompt for dom0/domU one has to spawn a tty on hvc0. The below steps work for 14.04* Ubuntu.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cp /etc/init/tty1.conf /etc/init/hvc0.conf
+Replace tty1 with hvc0 in file /etc/init/hvc0.conf
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="building-a-linux-domu-kernel">
+<h2>Building a Linux DomU Kernel<a class="headerlink" href="#building-a-linux-domu-kernel" title="Permalink to this headline">¶</a></h2>
+<p>Mainline Linux will be used for this purpose. The options to enable for building the domU kernel is as below:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make ARCH=arm CROSS_COMPILE=$CROSS_COMPILE exynos_defconfig
+make ARCH=arm menuconfig
+</pre></div>
+</div>
+<p>When presented with the menu, make sure the below are enabled:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Kernel Features -&gt; Xen guest support on ARM</p></li>
+<li><p>Device Drivers -&gt; Block devices -&gt; Xen virtual block device support.</p></li>
+<li><p>Device Drivers -&gt; Network device support -&gt; Xen network device frontend</p></li>
+<li><p>Device Drivers -&gt; Xen driver support -&gt; Select all.</p></li>
+<li><p>System Type -&gt; ARM system type -&gt; Allow multiple platforms to be selected.</p></li>
+<li><p>System Type -&gt; Multiple platform selection -&gt; ARMv7 based platforms</p></li>
+<li><p>System Type -&gt; Dummy Virtual Machine.</p></li>
+<li><p>Device Drivers -&gt; Input Device support -&gt; Miscellaneous devices -&gt; Xen virtual keyboard and mouse support.</p></li>
+</ol>
+</div></blockquote>
+<p>Build the linux kernel:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>make ARCH=arm CROSS_COMPILE=$CROSS_COMPILE zImage
+</pre></div>
+</div>
+<p>This zImage can then be used as a Linux domU kernel.</p>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<p>[2] Information about the <a class="reference external" href="http://odroid.com/dokuwiki/doku.php?id=en:odroid-xu">OdroidXU board</a>
+[3] <a class="reference external" href="http://forum.odroid.com/viewforum.php?f=59">Odroid XU forum</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="qemu.html" class="btn btn-neutral float-right" title="Xen Arm with Virtualization Extensions/qemu-system-aarch64" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="midway.html" class="btn btn-neutral float-left" title="Xen Arm with Virtualization Extensions/Midway" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

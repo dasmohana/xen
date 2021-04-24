@@ -1,0 +1,628 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Intel Memory Bandwidth Allocation (MBA) Feature &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Live Patching" href="livepatch.html" />
+    <link rel="prev" title="Intel Cache Allocation Technology and Code and Data Prioritization Features" href="intel_psr_cat_cdp.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Features</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dom0less.html">Dom0less</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature-levelling.html">Feature Levelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intel_psr_cat_cdp.html">Intel Cache Allocation Technology and Code and Data Prioritization Features</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Intel Memory Bandwidth Allocation (MBA) Feature</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#terminology">Terminology</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-details">User Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#technical-details">Technical Details</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-perspective">Hardware Perspective</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#relationship-between-mba-and-cat-cdp">Relationship between MBA and CAT/CDP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#design-overview">Design Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation-description">Implementation Description</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#areas-for-improvement">Areas for Improvement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changelog">Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="livepatch.html">Live Patching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-deprivilege.html">QEMU Deprivileging / dm_restrict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sched_credit.html">Credit Scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sched_credit2.html">Credit2 Scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sched_rtds.html">RTDS Scheduler</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Features</a> &raquo;</li>
+        
+      <li>Intel Memory Bandwidth Allocation (MBA) Feature</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/introduction/features/intel_psr_mba.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="intel-memory-bandwidth-allocation-mba-feature">
+<h1>Intel Memory Bandwidth Allocation (MBA) Feature<a class="headerlink" href="#intel-memory-bandwidth-allocation-mba-feature" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Status: <strong>Tech Preview</strong></p></li>
+<li><p>Architecture(s): Intel x86</p></li>
+<li><p>Component(s): Hypervisor, toolstack</p></li>
+<li><p>Hardware: MBA is supported on Skylake Server and beyond</p></li>
+</ul>
+<div class="section" id="terminology">
+<h2>Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>CAT         Cache Allocation Technology</p></li>
+<li><p>CBM         Capacity BitMasks</p></li>
+<li><p>CDP         Code and Data Prioritization</p></li>
+<li><p>COS/CLOS    Class of Service</p></li>
+<li><p>HW          Hardware</p></li>
+<li><p>MBA         Memory Bandwidth Allocation</p></li>
+<li><p>MSRs        Machine Specific Registers</p></li>
+<li><p>PSR         Intel Platform Shared Resource</p></li>
+<li><p>THRTL       Throttle value or delay value</p></li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The Memory Bandwidth Allocation (MBA) feature provides indirect and approximate
+control over memory bandwidth available per-core. This feature provides OS/
+hypervisor the ability to slow misbehaving apps/domains by using a credit-based
+throttling mechanism.</p>
+</div>
+<div class="section" id="user-details">
+<h2>User Details<a class="headerlink" href="#user-details" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Feature Enabling:</p>
+<p>Add “psr=mba” to boot line parameter to enable MBA feature.</p>
+</li>
+<li><p>xl interfaces:</p>
+<ol class="arabic">
+<li><p><cite>psr-mba-show [domain-id|domain-name]</cite>:</p>
+<p>Show memory bandwidth throttling for domain. Under different modes, it
+shows different type of data.</p>
+<p>There are two modes:
+Linear mode: the input precision is defined as 100-(MBA_MAX). For instance,
+if the MBA_MAX value is 90, the input precision is 10%. Values not an even
+multiple of the precision (e.g., 12%) will be rounded down (e.g., to 10%
+delay applied) by HW automatically. The response of throttling value is
+linear.</p>
+<p>Non-linear mode: input delay values are powers-of-two from zero to the
+MBA_MAX value from CPUID. In this case any values not a power of two will
+be rounded down the next nearest power of two by HW automatically. The
+response of throttling value is non-linear.</p>
+<p>For linear mode, it shows the decimal value. For non-linear mode, it shows
+hexadecimal value.</p>
+</li>
+<li><p><cite>psr-mba-set [OPTIONS] &lt;domain-id|domain-name&gt; &lt;throttling&gt;</cite>:</p>
+<p>Set memory bandwidth throttling for domain.</p>
+<p>Options:
+‘-s’: Specify the socket to process, otherwise all sockets are processed.</p>
+<p>Throttling value set in register implies the approximate amount of delaying
+the traffic between core and memory. Higher throttling value result in
+lower bandwidth. The max throttling value (MBA_MAX) supported can be
+obtained through CPUID inside hypervisor. Users can fetch the MBA_MAX value
+using the <cite>psr-hwinfo</cite> xl command.</p>
+</li>
+</ol>
+</li>
+</ul>
+</div>
+<div class="section" id="technical-details">
+<h2>Technical Details<a class="headerlink" href="#technical-details" title="Permalink to this headline">¶</a></h2>
+<p>MBA is a member of Intel PSR features, it shares the base PSR infrastructure
+in Xen.</p>
+<div class="section" id="hardware-perspective">
+<h3>Hardware Perspective<a class="headerlink" href="#hardware-perspective" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>MBA defines a range of MSRs to support specifying a delay value (Thrtl) per
+COS, with details below.</p>
+<dl>
+<dt><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a></dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 64%" />
+<col style="width: 36%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>MSR (per socket)</p></td>
+<td><p>Address</p></td>
+</tr>
+<tr class="row-even"><td><p>IA32_L2_QOS_Ext_BW_Thrtl_0</p></td>
+<td><p>0xD50</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-even"><td><p>IA32_L2_QOS_Ext_BW_Thrtl_n</p></td>
+<td><p>0xD50+n</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p><a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a></p>
+<p>When context switch happens, the COS ID of domain is written to per-hyper-
+thread MSR <cite>IA32_PQR_ASSOC</cite>, and then hardware enforces bandwidth allocation
+according to the throttling value stored in the Thrtl MSR register.</p>
+</div></blockquote>
+</div>
+<div class="section" id="relationship-between-mba-and-cat-cdp">
+<h3>Relationship between MBA and CAT/CDP<a class="headerlink" href="#relationship-between-mba-and-cat-cdp" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Generally speaking, MBA is completely independent of CAT/CDP, and any
+combination may be applied at any time, e.g. enabling MBA with CAT
+disabled.</p>
+<p>But it needs to be noticed that MBA shares COS infrastructure with CAT,
+although MBA is enumerated by different CPUID leaf from CAT (which
+indicates that the max COS of MBA may be different from CAT). In some
+cases, a domain is permitted to have a COS that is beyond one (or more)
+of PSR features but within the others. For instance, let’s assume the max
+COS of MBA is 8 but the max COS of L3 CAT is 16, when a domain is assigned
+9 as COS, the L3 CAT CBM associated to COS 9 would be enforced, but for MBA,
+the HW works as default value is set since COS 9 is beyond the max COS (8)
+of MBA.</p>
+</div></blockquote>
+</div>
+<div class="section" id="design-overview">
+<h3>Design Overview<a class="headerlink" href="#design-overview" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Core COS/Thrtl association</p>
+<p>When enforcing Memory Bandwidth Allocation, all cores of domains have
+the same default Thrtl MSR (COS0) which stores the same Thrtl (0). The
+default Thrtl MSR is used only in hypervisor and is transparent to tool stack
+and user.</p>
+<p>System administrators can change PSR allocation policy at runtime by
+using the tool stack. Since MBA shares COS ID with CAT/CDP, a COS ID
+corresponds to a 2-tuple, like [CBM, Thrtl] with only-CAT enabled, when CDP
+is enabled, the COS ID corresponds to a 3-tuple, like [Code_CBM, Data_CBM,
+Thrtl]. If neither CAT nor CDP is enabled, things are easier, since one COS
+ID corresponds to one Thrtl.</p>
+</li>
+<li><p>VCPU schedule</p>
+<p>This part reuses CAT COS infrastructure.</p>
+</li>
+<li><p>Multi-sockets</p>
+<p>Different sockets may have different MBA capabilities (like max COS)
+although it is consistent on the same socket. So the capability
+of per-socket MBA is specified.</p>
+<p>This part reuses CAT COS infrastructure.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="implementation-description">
+<h3>Implementation Description<a class="headerlink" href="#implementation-description" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Hypervisor interfaces:</p>
+<ol class="arabic simple">
+<li><p>Boot line param: “psr=mba” to enable the feature.</p></li>
+<li><dl class="simple">
+<dt>SYSCTL:</dt><dd><ul class="simple">
+<li><p>XEN_SYSCTL_PSR_MBA_get_info: Get system MBA information.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>DOMCTL:</dt><dd><ul class="simple">
+<li><p>XEN_DOMCTL_PSR_MBA_OP_GET_THRTL: Get throttling for a domain.</p></li>
+<li><p>XEN_DOMCTL_PSR_MBA_OP_SET_THRTL: Set throttling for a domain.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</li>
+<li><p>xl interfaces:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>psr-mba-show [domain-id]</dt><dd><p>Show system/domain runtime MBA throttling value. For linear mode,
+it shows the decimal value. For non-linear mode, it shows hexadecimal
+value.
+=&gt; XEN_SYSCTL_PSR_MBA_get_info/XEN_DOMCTL_PSR_MBA_OP_GET_THRTL</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>psr-mba-set [OPTIONS] &lt;domain-id&gt; &lt;throttling&gt;</dt><dd><p>Set bandwidth throttling for a domain.
+=&gt; XEN_DOMCTL_PSR_MBA_OP_SET_THRTL</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>psr-hwinfo</dt><dd><p>Show PSR HW information, including L3 CAT/CDP/L2 CAT/MBA.
+=&gt; XEN_SYSCTL_PSR_MBA_get_info</p>
+</dd>
+</dl>
+</li>
+</ol>
+</li>
+<li><p>Key data structure:</p>
+<ol class="arabic">
+<li><p>Feature HW info</p>
+<p><a href="#id9"><span class="problematic" id="id10">``</span></a>`
+struct {</p>
+<blockquote>
+<div><p>unsigned int thrtl_max;
+bool linear;</p>
+</div></blockquote>
+<p>} mba;</p>
+<ul>
+<li><p>Member <cite>thrtl_max</cite></p>
+<p><cite>thrtl_max</cite> is the max throttling value to be set, i.e. MBA_MAX.</p>
+</li>
+<li><p>Member <cite>linear</cite></p>
+<p><cite>linear</cite> means the response of delay value is linear or not.</p>
+</li>
+</ul>
+<p>As mentioned above, MBA is a member of Intel PSR features, it shares the
+base PSR infrastructure in Xen. For example, the ‘cos_max’ is a common HW
+property for all features. So, for other data structure details, please
+refer to ‘intel_psr_cat_cdp.pandoc’.</p>
+</li>
+</ol>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>MBA can only work on HW which supports it (check CPUID).</p>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>We can execute these commands to verify MBA on different HWs supporting them.</p>
+<dl>
+<dt>For example:</dt><dd><ol class="arabic simple">
+<li><p>User can get the MBA hardware info through ‘psr-hwinfo’ command. From
+result, user can know if this hardware works under linear mode or non-
+linear mode, the max throttling value (MBA_MAX) and so on.</p></li>
+</ol>
+<blockquote>
+<div><p>root&#64;:~$ xl psr-hwinfo –mba
+Memory Bandwidth Allocation (MBA):
+Socket ID       : 0
+Linear Mode     : Enabled
+Maximum COS     : 7
+Maximum Throttling Value: 90
+Default Throttling Value: 0</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>Then, user can set a throttling value to a domain. For example, set ‘10’,
+i.e 10% delay.</p></li>
+</ol>
+<blockquote>
+<div><p>root&#64;:~$ xl psr-mba-set 1 10</p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>User can check the current configuration of the domain through
+‘psr-mab-show’. For linear mode, the decimal value is shown.</p></li>
+</ol>
+<blockquote>
+<div><p>root&#64;:~$ xl psr-mba-show 1
+Socket ID       : 0
+Default THRTL   : 0</p>
+<blockquote>
+<div><dl class="simple">
+<dt>ID                     NAME            THRTL</dt><dd><p>1                 ubuntu14             10</p>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</dd>
+</dl>
+</div>
+<div class="section" id="areas-for-improvement">
+<h2>Areas for Improvement<a class="headerlink" href="#areas-for-improvement" title="Permalink to this headline">¶</a></h2>
+<p>N/A</p>
+</div>
+<div class="section" id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<p>N/A</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p><a href="#id11"><span class="problematic" id="id12">`INTEL RESOURCE DIRECTOR TECHNOLOGY (INTEL RDT) ALLOCATION FEATURES [Intel 64 and IA-32 Architectures Software Developer Manuals, vol3]&lt;http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html&gt;`__</span></a></p>
+</div>
+<div class="section" id="changelog">
+<h2>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<p>2017-01-10 1.0      Xen 4.9  Design document written
+2017-07-10 1.1      Xen 4.10 Changes:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Modify data structure according to latest
+codes;</p></li>
+<li><p>Add content for ‘Areas for improvement’;</p></li>
+<li><p>Other minor changes.</p></li>
+</ol>
+</div></blockquote>
+<dl class="simple">
+<dt>2017-08-09 1.2      Xen 4.10 Changes:</dt><dd><ol class="arabic simple">
+<li><p>Remove a special character to avoid error when
+building pandoc.</p></li>
+</ol>
+</dd>
+<dt>2017-08-15 1.3      Xen 4.10 Changes:</dt><dd><ol class="arabic simple">
+<li><p>Add terminology ‘HW’.</p></li>
+<li><p>Change ‘COS ID of VCPU’ to ‘COS ID of domain’.</p></li>
+<li><p>Change ‘COS register’ to ‘Thrtl MSR’.</p></li>
+<li><p>Explain the value shown for ‘psr-mba-show’ under
+different modes.</p></li>
+<li><p>Remove content in ‘Areas for improvement’.</p></li>
+</ol>
+</dd>
+<dt>2017-08-16 1.4      Xen 4.10 Changes:</dt><dd><ol class="arabic simple">
+<li><p>Add ‘&lt;&gt;’ for mandatory argument.</p></li>
+</ol>
+</dd>
+<dt>2017-08-30 1.5      Xen 4.10 Changes:</dt><dd><ol class="arabic simple">
+<li><p>Modify words in ‘Overview’ to make it easier to
+understand.</p></li>
+<li><p>Explain ‘linear/non-linear’ modes before mention
+them.</p></li>
+<li><p>Explain throttling value more accurate.</p></li>
+<li><p>Explain ‘MBA_MAX’.</p></li>
+<li><p>Correct some words in ‘Design Overview’.</p></li>
+<li><p>Change ‘mba_info’ to ‘mba’ according to code
+changes. Also, modify contents of it.</p></li>
+<li><p>Add context in ‘Testing’ part to make things
+more clear.</p></li>
+<li><p>Remove ‘n&lt;64’ to avoid out-of-sync.</p></li>
+</ol>
+</dd>
+<dt>2017-09-21 1.6      Xen 4.10 Changes:</dt><dd><ol class="arabic simple">
+<li><p>Add ‘domain-name’ as parameter of ‘psr-mba-show/
+psr-mba-set’.</p></li>
+<li><p>Fix some wordings.</p></li>
+<li><p>Explain how user can know the MBA_MAX.</p></li>
+<li><p>Move the description of ‘Linear mode/Non-linear
+mode’ into section of ‘psr-mba-show’.</p></li>
+<li><p>Change ‘per-thread’ to ‘per-hyper-thread’.</p></li>
+</ol>
+</dd>
+<dt>2017-09-29 1.7      Xen 4.10 Changes:</dt><dd><ol class="arabic simple">
+<li><p>Correct some words.</p></li>
+<li><p>Change ‘xl psr-mba-set 1 0xa’ to
+‘xl psr-mba-set 1 10’</p></li>
+</ol>
+</dd>
+<dt>2017-10-08 1.8      Xen 4.10 Changes:</dt><dd><ol class="arabic simple">
+<li><p>Correct some words.</p></li>
+</ol>
+</dd>
+</dl>
+<p>———- ——– ——– ——————————————-</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="livepatch.html" class="btn btn-neutral float-right" title="Live Patching" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="intel_psr_cat_cdp.html" class="btn btn-neutral float-left" title="Intel Cache Allocation Technology and Code and Data Prioritization Features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

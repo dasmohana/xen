@@ -1,0 +1,656 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Submitting Patches to Xen &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Contributing to Xen" href="contribute-xen.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/features/index.html">Features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Submitting Patches to Xen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-git-send-email">Setting up git send-email</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#important-settings">Important Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#subject-prefix">Subject Prefix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#canonical-subject-prefix">Canonical Subject Prefix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#common-modifications-to-the-subject-prefix">Common modifications to the Subject Prefix</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#changing-git-defaults-to-use-the-canonical-subject-prefix">Changing git defaults to use the Canonical Subject Prefix</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sending-a-patch-series">Sending a Patch Series</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-create-patches-using-git-format-patch">Step 1: Create Patches using git format-patch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-use-add-maintainers-pl-or-get-maintainer-pl">Step 2: Use <cite>add_maintainers.pl</cite> (or <cite>get_maintainer.pl</cite>)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#option-1-use-add-maintainers-pl">Option 1: Use <cite>add_maintainers.pl</cite></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option-2-use-get-maintainer-pl-manually">Option 2: Use <cite>get_maintainer.pl</cite> Manually</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-send-patches-using-git-send-email">Step 3: Send Patches using git send-email</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#submitting-patches-against-point-releases-such-as-xen-4-10">Submitting Patches against Point Releases, such as Xen 4.10</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sending-an-individual-patch">Sending an Individual Patch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-add-maintainers-pl-or-get-maintainer-pl-from-outside-of-xen-git">Using add_maintainers.pl (or get_maintainer.pl) from Outside of xen.git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reviewing-and-resending-patches">Reviewing and Resending Patches</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#code-review">Code Review</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#highlight-changes-in-the-new-version">Highlight Changes in the New Version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update-tags">Update Tags</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#resending-patches">Resending Patches</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-know-when-a-patch-has-been-committed">How to Know when a Patch has been Committed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#after-your-patch-is-committed">After your Patch is Committed</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Submitting Patches to Xen</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/contribute-xen/submit-patch.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="submitting-patches-to-xen">
+<h1>Submitting Patches to Xen<a class="headerlink" href="#submitting-patches-to-xen" title="Permalink to this headline">¶</a></h1>
+<p>Changes to the Xen Project are submitted to a mailing list either as an individual patch or as a patch series. A patch series is a series of patches that are related and broken into a logical series of individual patches. Patches, if accepted, will turn into commits in the git source tree. However, frequently multiple versions of patches will have to be posted, before the patch is accepted.</p>
+<p>Sending the patches to the list
+The xen-devel mailing list is moderated for non-subscribers. It is not mandatory to subscribe but it can help avoid this delay. It is possible to subscribe and then disable delivery in the mailman options so as to avoid moderation but not receive list traffic if that is what you would prefer.</p>
+<div class="section" id="setting-up-git-send-email">
+<h2>Setting up git send-email<a class="headerlink" href="#setting-up-git-send-email" title="Permalink to this headline">¶</a></h2>
+<p>The most robust way to send files is by using the git send-email command. (If you’re using mercurial, please see our <a href="#id21"><span class="problematic" id="id22">submitting_Xen_Patches_</span></a>-_mercurial).</p>
+<p>To do this, first set configure your information:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git config --global sendemail.from &quot;YOUR NAME &lt;user@example.org&gt;&quot;
+git config --global sendemail.smtpserver imap.example.org
+git config --global sendemail.smtpuser USER
+# depending on your config you may also set:
+git config --global sendemail.smtpencryption tls
+</pre></div>
+</div>
+<p>If you don’t want to enter password for your SMTP server all the time:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git config --global sendemail.smtppass = PASS
+</pre></div>
+</div>
+<div class="section" id="important-settings">
+<h3>Important Settings<a class="headerlink" href="#important-settings" title="Permalink to this headline">¶</a></h3>
+<p>There are a number of settings you may want to set globally or per repository as follows:</p>
+<p># Allows you to drop –thread from git format-patch …</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git config --global format.thread true
+</pre></div>
+</div>
+<p># Allows you to use -s or –signoff when committing a patch</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git config --global user.name &quot;YOUR NAME&quot;
+git config --global user.email &quot;&lt;user@example.org&gt;&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="subject-prefix">
+<h3>Subject Prefix<a class="headerlink" href="#subject-prefix" title="Permalink to this headline">¶</a></h3>
+<p>Patches and patch series are posted to a mailing list: when using the git format-patch command a subject prefix is added to a patch or patch series, which helps disambiguate normal discussions from posted patches and code reviews.</p>
+<p>git format-patch creates mails with subject lines such as</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Single patch
+[&lt;SUBJECT-PREFIX&gt;] &lt;Title of patch in git&gt;
+# Patch series
+[&lt;SUBJECT-PREFIX&gt; 0/n] &lt;Title of cover letter/patch series&gt;
+[&lt;SUBJECT-PREFIX&gt; 1/n] &lt;Title of 1st patch in git&gt;
+...
+[&lt;SUBJECT-PREFIX&gt; n/n] &lt;Title of nth patch in git&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="canonical-subject-prefix">
+<h3>Canonical Subject Prefix<a class="headerlink" href="#canonical-subject-prefix" title="Permalink to this headline">¶</a></h3>
+<p>As patches for different git repositories can be posted (or CC’ed) to different mailing lists, some conventions have emerged over time which help code reviewers identify which patch is intended for which git tree. We refer to these as canonical subject prefix. The table below shows recommended default Subject Prefixes, which either need to be passed using the <cite>–subject-prefix=&lt;Subject-Prefix&gt;</cite> option when calling git format-patch, or can be set as defaults per git repository as described here</p>
+<p>The following table lists common canonical subject prefixes used in the project:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>repo</strong></p></th>
+<th class="head"><p><strong>Subject Prefix</strong></p></th>
+<th class="head"><p><strong>List</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>git default</p></td>
+<td><p>PATCH</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://xenbits.xen.org/gitweb/?p=xen.git;a=summary">xen
+.git</a></p></td>
+<td><p>PATCH
+or XEN
+PATCH (recommended)</p></td>
+<td><p>xen-devel&#64;</p></td>
+</tr>
+<tr class="row-even"><td><dl class="simple">
+<dt><a href="#id1"><span class="problematic" id="id2">`</span></a>osstest.git</dt><dd><p>&lt;<a class="reference external" href="http://xenbits.xen">http://xenbits.xen</a></p>
+</dd>
+</dl>
+<p>.org/gitweb/?p=osste
+st.git;a=summary&gt;`__</p>
+</td>
+<td><p>OSSTEST PATCH</p></td>
+<td><p>xen-devel&#64;</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://xenbits.xen.org/gitweb/?p=xtf.git;a=summary">xtf
+.git</a></p></td>
+<td><p>XTF PATCH</p></td>
+<td><p>xen-devel&#64;</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://xenbits.xen.org/gitweb/?p=xenalyze.git;a=summary">xenalyze.git</a></p></td>
+<td><p>XENALYZE PATCH</p></td>
+<td><p>xen-devel&#64;</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://xenbits.xen.org/gitweb/?p=livepatch-build-tools.git;a=summary">livepatch-build-too
+ls.git</a></p></td>
+<td><p>L
+IVEPATCH-BUILD-TOOLS
+PATCH</p></td>
+<td><p>xen-devel&#64;</p></td>
+</tr>
+<tr class="row-even"><td><dl class="simple">
+<dt><a href="#id3"><span class="problematic" id="id4">`</span></a>mini-os.git</dt><dd><p>&lt;<a class="reference external" href="http://xenbits.xen">http://xenbits.xen</a></p>
+</dd>
+</dl>
+<p>.org/gitweb/?p=mini-
+os.git;a=summary&gt;`__</p>
+</td>
+<td><p>PATCH
+or MINI-OS
+PATCH (recommended)</p></td>
+<td><p>minios-devel&#64; but
+sometimes xen-devel&#64;
+is CC’ed</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://xenbits.xen.org/gitweb/?p=unikraft/unikraft.git;a=summary">unikraft/un
+ikraft.git</a></p></td>
+<td><p>UNIKRAFT PATCH</p></td>
+<td><p>minios-devel&#64;</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://xenbits.xen.org/gitweb/?a=project_list;pf=unikraft">unikra
+ft/…/&lt;REPO&gt;.git</a></p></td>
+<td><p>UNIKRAFT/&lt;REPO&gt;
+PATCH</p></td>
+<td><p>minios-devel&#64;</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If you do not use a canonical subject prefix some existing and future automated tooling may not work correctly: consider for example a situation in which a patch for livepatch-build-tools.git is sent to xen-devel&#64; and that this triggers a build test in different environments. In this case, the build test would try and apply the patch to xen.git and might fail in unexpected ways.</p>
+</div>
+</div>
+<div class="section" id="common-modifications-to-the-subject-prefix">
+<h3>Common modifications to the Subject Prefix<a class="headerlink" href="#common-modifications-to-the-subject-prefix" title="Permalink to this headline">¶</a></h3>
+<p>In addition, the following modifications to Subject Prefixes are commonly used and can also be used in combination</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Subject Prefix
+Modification</strong></p></th>
+<th class="head"><p><strong>Example</strong></p></th>
+<th class="head"><p><strong>When to use</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>RFC</strong> …</p></td>
+<td><p><strong>RFC</strong> XTF PATCH</p></td>
+<td><p>RFC means “Request
+For Comments”; use
+this when sending an
+experimental patch
+for discussion
+rather than
+application.</p></td>
+</tr>
+<tr class="row-odd"><td><p>… <strong>RESEND</strong></p></td>
+<td><p>XTF PATCH <strong>RESEND</strong></p></td>
+<td><p>Typically used if
+your patch has not
+been reviewed for
+some time and you
+want to remind
+people of the patch</p></td>
+</tr>
+<tr class="row-even"><td><p>.
+.. <strong>for-&lt;release&gt;</strong></p></td>
+<td><p>XEN
+PATCH <strong>for-4.13</strong></p></td>
+<td><p>Typically
+used <strong>after the
+master xen.git
+branch has been
+feature frozen</strong> and
+you want to
+highlight a patch
+that is destined for
+the release which is
+currently being
+developed</p></td>
+</tr>
+<tr class="row-odd"><td><p>… <strong>for-next</strong></p></td>
+<td><p>XEN
+PATCH <strong>for-next</strong></p></td>
+<td><p>Typically
+used <strong>towards the
+end of a development
+cycle</strong> when you
+want to highlight a
+patch that is
+destined for
+the <strong>next</strong> release</p></td>
+</tr>
+</tbody>
+</table>
+<p>The <cite>git format-patch</cite> contains the following options to help with these:</p>
+<ul class="simple">
+<li><p><cite>–rfc</cite> will mark a patch as RFC, but will always lead to RFC PATCH</p></li>
+<li><p><cite>–subject-prefix=&lt;Subject-Prefix&gt;</cite> allows you to set a subject prefix, but will overwrite any defaults you may have set</p></li>
+</ul>
+<div class="section" id="changing-git-defaults-to-use-the-canonical-subject-prefix">
+<h4>Changing git defaults to use the Canonical Subject Prefix<a class="headerlink" href="#changing-git-defaults-to-use-the-canonical-subject-prefix" title="Permalink to this headline">¶</a></h4>
+<p>To change the setting perform</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd &lt;local-git-tree&gt;
+git config --local format.subjectPrefix &quot;&lt;canonical subject prefix&gt;&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="sending-a-patch-series">
+<h2>Sending a Patch Series<a class="headerlink" href="#sending-a-patch-series" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-1-create-patches-using-git-format-patch">
+<h3>Step 1: Create Patches using git format-patch<a class="headerlink" href="#step-1-create-patches-using-git-format-patch" title="Permalink to this headline">¶</a></h3>
+<p>Git format patch allows you to create and save formatted patches in a directory. By default it will create them in the root of your git directory, but you probably want to direct this into a ../patches/feature-version directory (in the examples below ../patches/feature-v2 would contain only v2 of that series). It is also possible to store several versions of a patch, e.g. v1, v2, etc in the same ../patches/feature directory). Let’s say the last two commits of your head are part of your series you want to send out. In this case, the command line would look like</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ git format-patch --reroll-count=2 --thread --cover-letter -o ../patches/feature-v2 -2
+</pre></div>
+</div>
+<p>This will create three files, such as</p>
+<p><cite>v2-0000-cover-letter.patch</cite>
+<cite>v2-0002-Patch-to-do-bar.patch</cite>
+<cite>v2-0001-Patch-to-do-foo.patch</cite></p>
+</div>
+<div class="section" id="step-2-use-add-maintainers-pl-or-get-maintainer-pl">
+<h3>Step 2: Use <cite>add_maintainers.pl</cite> (or <cite>get_maintainer.pl</cite>)<a class="headerlink" href="#step-2-use-add-maintainers-pl-or-get-maintainer-pl" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="option-1-use-add-maintainers-pl">
+<h4>Option 1: Use <cite>add_maintainers.pl</cite><a class="headerlink" href="#option-1-use-add-maintainers-pl" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ ./scripts/add_maintainers.pl -d ../patches/feature-v2
+</pre></div>
+</div>
+<p>Then follow the instructions (which are essentially Step 3, with correct command line options based on what you pass to add_maintainers.pl). Note that the add_maintainers.pl script works around a limitation of git send-email … –cc-cmd=”./scripts/get_maintainer.pl” …, which does not automatically update the CC list of your cover letter.</p>
+<p>Other useful options include:</p>
+<ul class="simple">
+<li><p><cite>–reroll-count|-v</cite> (e.g. -v 2): If you store your patches in one directory with different versions in it generated by –reroll-count=2 you want to use this option</p></li>
+<li><p><cite>–patchcc|-p LOCATION</cite>: Inserts CC’s into a specific location (see –help ) to <cite>*.patch</cite> files</p></li>
+<li><p><cite>–covercc|-c LOCATION</cite>: Inserts CC’s into a specific location (see –help ) to the cover letter</p></li>
+<li><p><cite>–tags|-t</cite>: Adds people who have <a href="#id5"><span class="problematic" id="id6">*</span></a>-by tags to the mail header (git send-email does not do this itself)</p></li>
+<li><p><cite>–tagscc</cite>: Adds people who have <a href="#id7"><span class="problematic" id="id8">*</span></a>-by tags to the CC list</p></li>
+<li><p><cite>–arg|-a</cite> (e.g. -a “&lt;argument1 with space&gt;” -a &lt;argument2&gt; … for arguments you want to pass to <cite>./scripts/get_maintainer.pl</cite>)</p></li>
+</ul>
+<p>Common LOCATION combinations include:</p>
+<ul class="simple">
+<li><p>-p commit: copy CC blocks into the <a href="#id9"><span class="problematic" id="id10">*</span></a>.patch body (CC’s will become part of the commit message)</p></li>
+<li><p>-p none -c header: copy CC blocks from <a href="#id11"><span class="problematic" id="id12">*</span></a>.patch files in the cover letter without modifying <a href="#id13"><span class="problematic" id="id14">*</span></a>.patch files. This is useful in rerolled patches, where you do not want to modify the CC blocks. -p ccbody behaves similarly, only that any new CCs that may come from an updated MAINTAINERS file or from new files that have been added to <a href="#id15"><span class="problematic" id="id16">*</span></a>.patch files will be added to <a href="#id17"><span class="problematic" id="id18">*</span></a>.patch files.</p></li>
+<li><p>-p comment -c end: copy CC blocks after the <a href="#id19"><span class="problematic" id="id20">*</span></a>.patch body (CC’s will not be committed) and into the body of the cover letter</p></li>
+</ul>
+</div>
+<div class="section" id="option-2-use-get-maintainer-pl-manually">
+<h4>Option 2: Use <cite>get_maintainer.pl</cite> Manually<a class="headerlink" href="#option-2-use-get-maintainer-pl-manually" title="Permalink to this headline">¶</a></h4>
+<p>Foreach &lt;v2 patchfile&gt; in ../patches/feature (with XXXX &gt; 0000):</p>
+<ul class="simple">
+<li><p>Run: ./scripts/get_maintainer.pl &lt;v2 patchfile&gt;</p></li>
+<li><p>Review the e-mail list and prefix each line with Cc:</p></li>
+<li><p>Copy the e-mail CC block into patchfile</p></li>
+<li><p>Do anything else you want to do manually</p></li>
+</ul>
+<p>For <cite>v2-0000-cover-letter.patch</cite> take the superset of all the files generated previously and merge, then copy the e-mail CC block into <cite>0000-cover-letter.patch</cite>.</p>
+</div>
+</div>
+<div class="section" id="step-3-send-patches-using-git-send-email">
+<h3>Step 3: Send Patches using git send-email<a class="headerlink" href="#step-3-send-patches-using-git-send-email" title="Permalink to this headline">¶</a></h3>
+<p>Send the patches using:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ git send-email --to xen-devel@lists.xenproject.org ../patches/feature-v2/*.patch
+</pre></div>
+</div>
+<p>Other useful options include:</p>
+<p>–dry-run
+–cc if you need to CC additional reviewers (e.g. from within your team)</p>
+</div>
+</div>
+<div class="section" id="submitting-patches-against-point-releases-such-as-xen-4-10">
+<h2>Submitting Patches against Point Releases, such as Xen 4.10<a class="headerlink" href="#submitting-patches-against-point-releases-such-as-xen-4-10" title="Permalink to this headline">¶</a></h2>
+<p>When you develop against older Xen versions you are likely going to use an outdated version of the MAINTAINERS file. Typically only the files on staging or master are up-to-date. To work around this, use the following slightly modified workflow:</p>
+<p>This ensures that you use the latest set of tools and the latest MAINTAINERS file.</p>
+</div>
+<div class="section" id="sending-an-individual-patch">
+<h2>Sending an Individual Patch<a class="headerlink" href="#sending-an-individual-patch" title="Permalink to this headline">¶</a></h2>
+<p>You can use the same workflow as outlined in the previous section, without generating a cover letter. In this case, the git-format-patch command line in step 1 would look like</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ git format-patch --thread -o ../patches/bugfix-v2 -1
+</pre></div>
+</div>
+<p>This is followed by steps 2 and 3. However, for single patches without a cover letter, using git-send-email alone, is quite a reasonable option. In this case, you can use the following command line, which will get the CC list from the ./scripts/get_maintainer.pl script, which allows you to fold all 3 steps into 1.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ git send-email --to xen-devel@lists.xenproject.org --cc-cmd=&quot;./scripts/get_maintainer.pl&quot; -1
+</pre></div>
+</div>
+<p>Other useful options include:</p>
+<ul class="simple">
+<li><p>–dry-run will go through all the motions of preparing the patchbomb, but instead of sending a mail, will just output the mails it would have sent. Useful for testing.</p></li>
+<li><p>–cc if you need to CC additional reviewers (e.g. from within your team)</p></li>
+<li><p>–reroll-count=N allows you to change the revision of the patch</p></li>
+<li><p>–rfc and –subject-prefix=Subject-Prefix allow you to change the subject prefix: please read this document before using these options</p></li>
+</ul>
+</div>
+<div class="section" id="using-add-maintainers-pl-or-get-maintainer-pl-from-outside-of-xen-git">
+<h2>Using add_maintainers.pl (or get_maintainer.pl) from Outside of xen.git<a class="headerlink" href="#using-add-maintainers-pl-or-get-maintainer-pl-from-outside-of-xen-git" title="Permalink to this headline">¶</a></h2>
+<p>You can use <cite>add_maintainers.pl</cite> or <cite>get_maintainer.pl</cite> on any Xen Project git repository with a compatible MAINTAINERS file in the root of its tree. An example is livepatch-build-tools.git. In this case simply replace ./scripts/add_maintainers.pl or ./scripts/get_maintainer.pl with the full path to the script.</p>
+<p># You are in the xen.git sister repository (e.g. livepatch-build-tools)</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ git format-patch ... -o &lt;patchdir&gt; ...
+$ $LOCATION-OF-XEN-GIT/scripts/add_maintainers.pl -d &lt;patchdir&gt;
+$ git send-email ... &lt;patchdir&gt;
+</pre></div>
+</div>
+<p>A minimum template for such a MAINTAINERS file can be found below.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>This file follows the same conventions as outlined in
+xen.git:MAINTAINERS. Please refer to the file in xen.git
+for more information.
+
+THE REST
+M:  MAINTAINER1 &lt;maintainer1@email.com&gt;
+M:  MAINTAINER2 &lt;maintainer2@email.com&gt;
+L:  xen-devel@lists.xenproject.org
+S:  Supported
+F:  *
+F:  */
+V:  xen-maintainers-1
+</pre></div>
+</div>
+</div>
+<div class="section" id="reviewing-and-resending-patches">
+<h2>Reviewing and Resending Patches<a class="headerlink" href="#reviewing-and-resending-patches" title="Permalink to this headline">¶</a></h2>
+<p>After posting your patches you will hopefully see some response in the form of comments, patch review and eventually commit.</p>
+<div class="section" id="code-review">
+<h3>Code Review<a class="headerlink" href="#code-review" title="Permalink to this headline">¶</a></h3>
+<p>The form of the review may often be quite direct and to the point which may be daunting for some people. However bear in mind that detailed criticism of a patch usually means that the reviewer is interested in your patch and wants to see it go in!</p>
+<p>Once you have addressed any review you should normally resend the patch. It is normally expected that you address all review comments before reposting. This often means code changes in your patch but could also mean simply responding to the review comments explaining you reasoning or giving reasons why something should be the way it is.</p>
+<p>You should also rebase your change against the project’s development tree before sending out a new version, such that when it is approved it applies cleanly. The only reason not to do that is if you don’t expect it to be approved, and want feedback on what you have. In that case you can do the rebase later.</p>
+<p>The relevant command line options in git-format-patch, ./scripts/add_maintainers.pl and git-send-email (if used standalone) for reposting new revisions is <cite>–reroll-count|-v</cite></p>
+<div class="section" id="highlight-changes-in-the-new-version">
+<h4>Highlight Changes in the New Version<a class="headerlink" href="#highlight-changes-in-the-new-version" title="Permalink to this headline">¶</a></h4>
+<p>When resending a patch you should normally include a note of the changes between the current and last version of the patch. Common practice is to include these notes after your Signed-off-by separated by a triple-dash (—). This indicates patch commentary specific to the posting which need not be included in the final changelog (although you should also remember to update the changelog if necessary). You should also include a “V2” (V3, V4 etc) tag in the subject line (if you are using the git send-email command then the <cite>–reroll-count=N</cite> option is helpful here, or for older git versions –subject-prefix=’PATCH vN’).</p>
+</div>
+<div class="section" id="update-tags">
+<h4>Update Tags<a class="headerlink" href="#update-tags" title="Permalink to this headline">¶</a></h4>
+<p>If someone replies to your patch with a tag of the form Acked-by: &lt;Developer&gt;, Reviewed-by:, Tested-by: etc then, assuming you have not significantly reworked the patch, you should include these tags in any reposting after your own Signed-off-by line. This lets people know that the patch has been seen and that someone approves of it and also serves to prevent reviewers wasting time re-reviewing a patch which is not significantly different to last time. The developers with commit access also like to see postings with such tags since it means they are likely to be much easier to deal with and commit.</p>
+<p>An example of a new Patch Version
+An example of a resend of the example patch from above might be:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Subject: [PATCH v2] foobar: Add a new trondle calls
+
+Add a some new trondle calls to the foobar interface to support
+the new zot feature.
+
+Signed-off-by: Joe Smith &lt;joe.smith@citrix.com&gt;
+Acked-by: Jane Doe &lt;jane.doe@example.com&gt;
+
+---
+Changed since v1:
+* fix coding style
+* be sure to treadle the trondle in the error case.
+
+diff -r 63531e640828 tools/libxc/Makefile
+--- a/tools/libxc/Makefile  Mon Dec 07 17:01:11 2009 +0000
++++ b/tools/libxc/Makefile  Mon Dec 21 11:45:00 2009 +0000
+...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="resending-patches">
+<h3>Resending Patches<a class="headerlink" href="#resending-patches" title="Permalink to this headline">¶</a></h3>
+<p>If you do not get any response to your patch or you got lots of Acked-by’s but the patch has not been committed (remember that reviewers and maintainers are busy people too and sometimes things may fall through the cracks) then after some time, perhaps 2-4 weeks (guidelines), you should resend the patch, perhaps including [RESEND] in the subject line to alert people that the last mail was dropped. Before resending you should:</p>
+<p>Check that the patch has not been applied to the staging branch, since committers do not always send a notification when they apply a patch. Consider if there is anything you can do to improve the commit message or subject line of your patch to better attract the attention of the relevant people. Remember to include any Acked-by/Reviewed-by which you received in response to the previous post.</p>
+<div class="section" id="how-to-know-when-a-patch-has-been-committed">
+<h4>How to Know when a Patch has been Committed<a class="headerlink" href="#how-to-know-when-a-patch-has-been-committed" title="Permalink to this headline">¶</a></h4>
+<p>Changes committed to Xen Project by the committers are immediately available in the “staging” branch of the main xen.git tree. They are then automatically tested, and if the tests pass the changes are propagated to the “master” branch.</p>
+</div>
+<div class="section" id="after-your-patch-is-committed">
+<h4>After your Patch is Committed<a class="headerlink" href="#after-your-patch-is-committed" title="Permalink to this headline">¶</a></h4>
+<p>If your patch turns out to break something you will be expected to respond promptly to help diagnose and fix the problem. This assumes that you in particular keep an eye on the osstest flight reports sent to xen-devel. If it can’t be fixed quickly, your change may be reverted.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="contribute-xen.html" class="btn btn-neutral float-left" title="Contributing to Xen" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Live Patching &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Migration" href="migration.html" />
+    <link rel="prev" title="Intel Memory Bandwidth Allocation (MBA) Feature" href="intel_psr_mba.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Features</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dom0less.html">Dom0less</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature-levelling.html">Feature Levelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intel_psr_cat_cdp.html">Intel Cache Allocation Technology and Code and Data Prioritization Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intel_psr_mba.html">Intel Memory Bandwidth Allocation (MBA) Feature</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Live Patching</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#details">Details</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-deprivilege.html">QEMU Deprivileging / dm_restrict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sched_credit.html">Credit Scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sched_credit2.html">Credit2 Scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sched_rtds.html">RTDS Scheduler</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Features</a> &raquo;</li>
+        
+      <li>Live Patching</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/introduction/features/livepatch.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="live-patching">
+<h1>Live Patching<a class="headerlink" href="#live-patching" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Status: <strong>Supported</strong></p></li>
+<li><p>Architecture: x86</p></li>
+<li><p>Status: <strong>Tech Preview/Experimental</strong></p></li>
+<li><p>Architecture: ARM</p></li>
+<li><p>Component(s): Hypervisor, toolstack</p></li>
+</ul>
+<div class="section" id="details">
+<h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
+<p>Xen Live Patching has been available as tech preview feature since Xen
+4.7 and has now had a couple of releases to stabilize. Xen Live patching
+has been used by multiple vendors to fix several real-world security
+issues without any severe bugs encountered. Additionally, there are now
+tests in OSSTest that test live patching to ensure that no regressions
+are introduced.</p>
+<p>Based on the amount of testing and usage it has had, we are ready to
+declare live patching as a ‘Supported’ feature on x86.</p>
+<p>Live patching is slightly peculiar when it comes to support because it
+allows the host administrator to break their system rather easily
+depending on the content of the live patch. Because of this, it is
+worth detailing the scope of security support:</p>
+<ol class="arabic simple">
+<li><p>Unprivileged access to live patching operations:
+Live patching operations should only be accessible to privileged
+guests and it shall be treated as a security issue if this is not
+the case.</p></li>
+<li><p>Bugs in the patch-application code such that vulnerabilities exist
+after application:
+If a correct live patch is loaded but it is not applied correctly
+such that it might result in an insecure system (e.g. not all
+functions are patched), it shall be treated as a security issue.</p></li>
+<li><p>Bugs in livepatch-build-tools creating an incorrect live patch that
+results in an insecure host:
+If livepatch-build-tools creates an incorrect live patch that
+results in an insecure host, this shall not be considered a security
+issue. A live patch should be checked to verify that it is valid
+before loading.</p></li>
+<li><p>Loading an incorrect live patch that results in an insecure host or
+host crash:
+If a live patch (whether created using livepatch-build-tools or some
+alternative) is loaded and it results in an insecure host or host
+crash due to the content of the live patch being incorrect or the
+issue being inappropriate to live patch, this is not considered as a
+security issue.</p></li>
+<li><p>Bugs in the live patch parsing code (the ELF loader):
+Bugs in the live patch parsing code such as out-of-bounds reads
+caused by invalid ELF files are not considered to be security issues
+because the it can only be triggered by a privileged domain.</p></li>
+<li><p>Bugs which allow a guest to prevent the application of a livepatch:
+A guest should not be able to prevent the application of a live
+patch. If an unprivileged guest can somehow prevent the application
+of a live patch despite pausing it (xl pause …), it shall be
+treated as a security issue.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is expected that live patches are tested in a test environment</p>
+</div>
+<p>before being used in production to avoid unexpected issues. In
+particular, to avoid the issues described by (3), (4), &amp; (5).</p>
+<p>There are also some generic security questions which are worth asking:</p>
+<ol class="arabic simple">
+<li><p>Is guest-&gt;host privilege escalation possible?</p></li>
+</ol>
+<p>The new live patching sysctl subops are only accessible to privileged
+domains and this is tested by OSSTest with an XTF test.
+There is a caveat – an incorrect live patch can introduce a guest-&gt;host
+privilege escalation.</p>
+<ol class="arabic simple" start="2">
+<li><p>Is guest user-&gt;guest kernel escalation possible?</p></li>
+</ol>
+<p>No, although an incorrect live patch can introduce a guest user-&gt;guest
+kernel privilege escalation.</p>
+<ol class="arabic simple" start="3">
+<li><p>Is there any information leakage?</p></li>
+</ol>
+<p>The new live patching sysctl subops are only accessible to privileged
+domains so it is not possible for an unprivileged guest to access the
+list of loaded live patches. This is tested by OSSTest with an XTF test.
+There is a caveat – an incorrect live patch can introduce an
+information leakage.</p>
+<ol class="arabic simple" start="4">
+<li><p>Can a Denial-of-Service be triggered?</p></li>
+</ol>
+<p>There are no known ways that an unprivileged guest can prevent a live
+patch from being loaded.
+Once again, there is a caveat that an incorrect live patch can introduce
+an arbitrary denial of service.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="migration.html" class="btn btn-neutral float-right" title="Migration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="intel_psr_mba.html" class="btn btn-neutral float-left" title="Intel Memory Bandwidth Allocation (MBA) Feature" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

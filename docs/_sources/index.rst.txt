@@ -1,0 +1,83 @@
+.. SPDX-License-Identifier: CC-BY-4.0
+
+The Xen Hypervisor Documentation
+================================
+
+.. note::
+
+   Xen's Sphinx/RST documentation is a work in progress. The existing
+   documentation can be found at https://xenbits.xen.org/docs/
+
+Xen is an open source, bare metal hypervisor.  It runs as the most privileged
+piece of software on the system, and shares the resources of the hardware
+between virtual machines.
+
+.. toctree::
+   :maxdepth: 4
+   :caption: Introduction to Xen
+   :hidden:
+   
+   introduction/introduction
+   introduction/architecture
+   introduction/installation
+   introduction/features/index
+
+
+.. toctree::
+   :maxdepth: 4
+   :caption: Tutorials
+   :hidden:
+   :glob:
+
+   tutorials/*
+   
+.. toctree::
+   :maxdepth: 4
+   :caption: Xen on Arm
+   :hidden:
+
+   tutorials/running-xen-on-arm/requirements
+   tutorials/running-xen-on-arm/qemu
+   tutorials/running-xen-on-arm/arndale
+   tutorials/running-xen-on-arm/odroid
+   tutorials/running-xen-on-arm/midway
+   tutorials/running-xen-on-arm/building-xen-arm
+   
+
+.. toctree::
+   :maxdepth: 4
+   :caption: How-to Guides
+   :hidden:
+   :glob:
+
+   how-to/*
+
+
+.. toctree::
+   :maxdepth: 4
+   :caption: References
+   :hidden:
+   :glob:
+
+   reference/*
+
+
+.. toctree::
+   :caption: Glossary
+   :hidden:
+
+   glossary
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: FAQ
+
+   faq/faq
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contributing to the Xen Project
+
+   contribute-xen/contribute-xen
+   contribute-xen/submit-patch

@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Xen Arm with Virtualization Extensions/Arndale &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Xen Arm with Virtualization Extensions/Midway" href="midway.html" />
+    <link rel="prev" title="RTDS Scheduler" href="../../introduction/features/sched_rtds.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/features/index.html">Features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Xen Arm with Virtualization Extensions/Arndale</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#preparing-the-board">Preparing the Board</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-xen-and-linux-dom0">Building Xen and Linux Dom0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#booting-xen-and-dom0">Booting Xen and Dom0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#booting-via-pxe">Booting via PXE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#booting-directly-on-the-sd-card">Booting Directly on the SD Card</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alternate-sd-approach-based-on-linaro-pre-built-image-for-arndale-5250">Alternate SD approach based on Linaro pre-built image for Arndale 5250</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="midway.html">Xen Arm with Virtualization Extensions/Midway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="odroid.html">Xen Arm with Virtualization Extensions/OdroidXU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qemu.html">Xen Arm with Virtualization Extensions/qemu-system-aarch64</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/how-xen-boots.html">How Xen Boots</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/imagebuilder.html">ImageBuilder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/xen-arm-debug.html">Xen Arm Debug Hypercalls</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Xen Arm with Virtualization Extensions/Arndale</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/tutorials/running-xen-on-arm/arndale.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="xen-arm-with-virtualization-extensions-arndale">
+<h1>Xen Arm with Virtualization Extensions/Arndale<a class="headerlink" href="#xen-arm-with-virtualization-extensions-arndale" title="Permalink to this headline">¶</a></h1>
+<p>The Arndale board is now supported in Xen upstream.</p>
+<div class="section" id="preparing-the-board">
+<h2>Preparing the Board<a class="headerlink" href="#preparing-the-board" title="Permalink to this headline">¶</a></h2>
+<p>The bootloader provided with the Arndale does not let Xen boot in hypervisor mode, so we will use the u-boot provided by Linaro.</p>
+</div>
+<div class="section" id="building-xen-and-linux-dom0">
+<h2>Building Xen and Linux Dom0<a class="headerlink" href="#building-xen-and-linux-dom0" title="Permalink to this headline">¶</a></h2>
+<p>First, build Linux for dom0 to have a device tree to provide to Xen. You can get a tree from Linaro which contains a working configuration for the Arndale.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone -b linux-linaro git://git.linaro.org/kernel/linux-linaro-tracking.git linux
+cd linux
+ARCH=arm scripts/kconfig/merge_config.sh linaro/configs/linaro-base.conf linaro/configs/distribution.conf\
+        linaro/configs/kvm-host.conf linaro/configs/xen.conf linaro/configs/arndale.conf linaro/configs/lt-arndale.conf
+make ARCH=arm zImage
+make ARCH=arm dtbs
+</pre></div>
+</div>
+<p>The device tree used by the Arndale board is located in <cite>arch/arm/boot/dts/exynos5250-arndale.dtb</cite>.</p>
+<p>Then, build Xen on ARM.</p>
+<p>For the moment, xen doesn’t build uImage for U-Boot. You can create the image with:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mkimage -A arm -T kernel -a 0x80200000 -e 0x80200000 -C none -d &quot;$xen_src/xen/xen&quot; xen-uImage
+</pre></div>
+</div>
+<p>where, $xen_src is the root directory of your xen git. Note that before commit 47d1a51 (xen: arm: make zImage the default target which we install) it was necessary to use <cite>$xen_src/xen/xen.bin</cite> instead.</p>
+</div>
+<div class="section" id="booting-xen-and-dom0">
+<h2>Booting Xen and Dom0<a class="headerlink" href="#booting-xen-and-dom0" title="Permalink to this headline">¶</a></h2>
+<p>To boot Xen and Dom0, you can use:</p>
+<ul class="simple">
+<li><p>PXE: it’s easier for development but you need a computer which act as a server;</p></li>
+<li><p>copy binary on the SD card: when you don’t have network on your board.</p></li>
+</ul>
+<p>Once you have chosen the boot method, you can start to follow steps in the next sections. When you have finished to configure your board, you can:</p>
+<ul class="simple">
+<li><p>Save the U-Boot configuration with saveenv command. The next time you want to reboot your board, you won’t have to reconfigure U-Boot.</p></li>
+<li><p>Boot with boot command.</p></li>
+</ul>
+</div>
+<div class="section" id="booting-via-pxe">
+<h2>Booting via PXE<a class="headerlink" href="#booting-via-pxe" title="Permalink to this headline">¶</a></h2>
+<p>The following script allow U-boot to download everything via tftp and boot xen.</p>
+<ol class="arabic">
+<li><p>Setup the PXE Server</p></li>
+<li><p>Copy xen-uImage, the zImage (rename in linux-zImage), exynos5250-arndale.dtb in /tftpboot/</p></li>
+<li><p>Copy the script in /tftpboot</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>wget http://xenbits.xen.org/people/julieng/load-xen-tftp.scr.txt
+mkimage -T script -C none -d load-xen-tftp.scr.txt /tftpboot/load-xen-tftp.img
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>At U-Boot prompt, on your board, you need to set the following variable:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>setenv ipaddr 10.y.y.y
+setenv serverip 10.x.x.x
+setenv usbethaddr 00:zz:zz:zz:zz:zz
+setenv ethaddr 00:zz:zz:zz:zz:zz
+setenv xen_addr_r 0x50000000
+setenv kernel_addr_r 0x60000000
+setenv dtb_addr_r 0x42000000
+setenv script_addr_r 0x40080000
+setenv xen_path /xen-uImage
+setenv kernel_path /linux-zImage
+setenv dtb_path /exynos5250-arndale.dtb
+setenv bootcmd &#39;tftpboot $script_addr_r /load-xen-tftp.img; source $script_addr_r&#39;
+setenv xen_bootargs &#39;sync_console console=dtuart dtuart=/serial@12C20000&#39;
+setenv dom0_bootargs &#39;console=hvc0 ignore_loglevel psci=enable clk_ignore_unused root=/dev/mmcblk1p3&#39;
+</pre></div>
+</div>
+<p>with:</p>
+<p>10.y.y.y the ip addr of the board
+10.x.x.x the ip of a tftp server (or PXE server).
+00:zz:zz:zz:zz:zz the MAC address of the board.</p>
+<p>You can generate it with the following shell command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>bash -c &#39;printf &quot;00:16:3e:%02x:%02x:%02x\n&quot; $(( $RANDOM % 256 )) $(( $RANDOM % 256 )) $(( $RANDOM % 256 ))&#39;
+</pre></div>
+</div>
+<p>or, using the <a class="reference external" href="www.hellion.org.uk/cgi-bin/randmac.pl">www.hellion.org.uk/cgi-bin/randmac.pl</a> website.</p>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="booting-directly-on-the-sd-card">
+<h2>Booting Directly on the SD Card<a class="headerlink" href="#booting-directly-on-the-sd-card" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Copy xen-uImage and the zImage the root directory of you SD card.</p></li>
+<li><p>At U-Boot prompt, on your board, you need to set the following variable:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>setenv kernel_addr_r 0x60000000
+setenv xen_addr_r 0x50000000
+setenv bootcmd_load_linux_mmc &#39;ext2load mmc 1:0 $kernel_addr_r /zImage&#39;
+setenv boot_xen_mmc &#39;run bootcmd_load_linux_mmc; ext2load mmc 1:0 $xen_addr_r /xen-uImage; bootm $xen_addr_r -&#39;
+setenv bootcmd &#39;run boot_xen_mmc&#39;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Assuming the SD card has only one partition with ext2 filesystem, execute the boot command with the following command:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>boot
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="alternate-sd-approach-based-on-linaro-pre-built-image-for-arndale-5250">
+<h2>Alternate SD approach based on Linaro pre-built image for Arndale 5250<a class="headerlink" href="#alternate-sd-approach-based-on-linaro-pre-built-image-for-arndale-5250" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>On your host development machine, install [Linaro prebuilt] to a uSD card (assuming it mounts at /dev/sdb, see linaro instructions for more detail):</p></li>
+</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ wget https://releases.linaro.org/14.03/ubuntu/arndale/arndale-saucy_server_20140323-616.img.gz
+$ gunzip &lt; arndale-saucy_server_20140323-616.img.gz | sudo dd bs=64k of=/dev/sdb
+</pre></div>
+</div>
+<ol class="arabic" start="2">
+<li><p>Copy your compiled xen-uImage, linux-zImage, and exynos5250-arndale.dtb all to the boot partition on the uSD card. Copy the contents of xen/dist/install to the rootfs partition. Unmount the uSD from your host development machine, insert it in the Arndale.</p></li>
+<li><p>Start minicom on host development machine, connected to the Arndale via a serial cable:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo minicom
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Power on Arndale, press reset, watch the minicom console, and hit “enter” to interrupt U-Boot to get the u-Boot prompt. Enter the following into the minicom console. The saveenv stores the environment variables, so you won’t have to repeat those the next time around.</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>setenv xen_addr_r 0x50000000
+setenv kernel_addr_r 0x60000000
+setenv dtb_addr_r 0x42000000
+setenv xen_bootargs &#39;sync_console console=dtuart dtuart=/serial@12C20000 dom0_mem=512M&#39;
+setenv dom0_bootargs &#39;console=hvc0 ignore_loglevel psci=enable clk_ignore_unused root=/dev/mmcblk1p3&#39;
+saveenv
+fatload mmc 0:2 $kernel_addr_r linux-zImage
+fatload mmc 0:2 $xen_addr_r xen-uImage
+fatload mmc 0:2 $dtb_addr_r exynos5250-arndale.dtb
+fdt addr $dtb_addr_r
+fdt resize
+fdt set /chosen xen,xen-bootargs \&quot;$xen_bootargs\&quot;
+fdt set /chosen xen,dom0-bootargs \&quot;$dom0_bootargs\&quot;
+fdt mknode /chosen modules
+fdt set /chosen/modules &#39;#address-cells&#39; &lt;1&gt;
+fdt set /chosen/modules &#39;#size-cells&#39; &lt;1&gt;
+fdt mknode /chosen/modules module@0
+fdt set /chosen/modules/module@0 compatible xen,linux-zimage xen,multiboot-module
+fdt set /chosen/modules/module@0 reg &lt;$kernel_addr_r 0x00a00000&gt;
+bootm $xen_addr_r - $dtb_addr_r
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<p>Information about the Arndale board development: <a class="reference external" href="www.arndaleboard.org/wiki/index.php/WiKi">www.arndaleboard.org/wiki/index.php/WiKi</a>.
+Linaro page about the Arndale board: <a class="reference external" href="wiki.linaro.org/Boards/Arndale/Setup/PXEBoot">wiki.linaro.org/Boards/Arndale/Setup/PXEBoot</a>
+Alternate SD approach based on Linaro pre-built image (more detailed): <a class="reference external" href="http://www.episodic.cc/2014/06/booting-linux-in-xens-dom0-on-arndale.html">Booting Linux in Xen’s Dom0 on Arndale Exynos 5250</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="midway.html" class="btn btn-neutral float-right" title="Xen Arm with Virtualization Extensions/Midway" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../introduction/features/sched_rtds.html" class="btn btn-neutral float-left" title="RTDS Scheduler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

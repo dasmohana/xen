@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Code Coverage &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Microcode Loading" href="../admin-guide/microcode-loading.html" />
+    <link rel="prev" title="How Xen Boots" href="how-xen-boots.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/features/index.html">Features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Code Coverage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#compiling-xen">Compiling Xen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accessing-the-raw-coverage-data">Accessing the raw coverage data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gcc-coverage">GCC coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clang-coverage">Clang coverage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Code Coverage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/how-to/code-coverage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="code-coverage">
+<h1>Code Coverage<a class="headerlink" href="#code-coverage" title="Permalink to this headline">¶</a></h1>
+<p>Xen can be compiled with coverage support.  When configured, Xen will record
+the coverage of its own basic blocks.  Being a piece of system software rather
+than a userspace, it can’t automatically write coverage out to the filesystem,
+so some extra steps are required to collect and process the data.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>ARM doesn’t currently boot when the final binary exceeds 2MB in size,
+and the coverage build tends to exceed this limit.</p>
+</div>
+<div class="section" id="compiling-xen">
+<h2>Compiling Xen<a class="headerlink" href="#compiling-xen" title="Permalink to this headline">¶</a></h2>
+<p>Coverage support is dependent on the compiler and toolchain used.  As Xen
+isn’t a userspace application, it can’t use the compiler supplied library, and
+instead has to provide some parts of the implementation itself.</p>
+<p>For x86, coverage support was introduced with GCC 3.4 or later, and Clang 3.9
+or later, and Xen is compatible with these.  However, the compiler internal
+formats do change occasionally, and this may involve adjustments to Xen.
+While we do our best to keep up with these changes, Xen may not be compatible
+with bleeding edge compilers.</p>
+<p>To build with coverage support, enable <code class="docutils literal notranslate"><span class="pre">CONFIG_COVERAGE</span></code> in Kconfig.  The
+build system will automatically select the appropriate format based on the
+compiler in use.</p>
+<p>The resulting binary will record its own coverage while running.</p>
+</div>
+<div class="section" id="accessing-the-raw-coverage-data">
+<h2>Accessing the raw coverage data<a class="headerlink" href="#accessing-the-raw-coverage-data" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">SYSCTL_coverage_op</span></code> hypercall is used to interact with the coverage
+data.  A dom0 userspace helper, <code class="docutils literal notranslate"><span class="pre">xenconv</span></code> is provided as well, which thinly
+wraps this hypercall.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">read</span></code> subcommand can be used to obtain the raw coverage data:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[root@host ~]# xencov read &gt; coverage.dat
+</pre></div>
+</div>
+<p>This is toolchain-specific data and needs to be fed back to the appropriate
+programs to post-process.</p>
+<p>Alternatively, the <code class="docutils literal notranslate"><span class="pre">reset</span></code> subcommand can be used reset all counters back to
+0:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[root@host ~]# xencov reset
+</pre></div>
+</div>
+</div>
+<div class="section" id="gcc-coverage">
+<h2>GCC coverage<a class="headerlink" href="#gcc-coverage" title="Permalink to this headline">¶</a></h2>
+<p>A build using GCC’s coverage will result in <code class="docutils literal notranslate"><span class="pre">*.gcno</span></code> artefact for every
+object file.  The raw coverage data needs splitting to form the matching
+<code class="docutils literal notranslate"><span class="pre">*.gcda</span></code> files.</p>
+<p>An example of how to view the data is as follows.  It uses <code class="docutils literal notranslate"><span class="pre">lcov</span></code> which is a
+graphical frontend to <code class="docutils literal notranslate"><span class="pre">gcov</span></code>.</p>
+<ul class="simple">
+<li><p>Obtain the raw coverage data from the test host, and pull it back to the
+build working tree.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">xencov_split</span></code> to extract the <code class="docutils literal notranslate"><span class="pre">*.gcda</span></code> files.  Note that full build
+paths are used by the tools, so splitting needs to output relative to <code class="docutils literal notranslate"><span class="pre">/</span></code>.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">geninfo</span></code> to post-process the raw data.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">genhtml</span></code> to render the results as HTML.</p></li>
+<li><p>View the results in a browser.</p></li>
+</ul>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>xen.git/xen$ ssh root@host xencov read &gt; coverage.dat
+xen.git/xen$ ../tools/xencov_split coverage.dat --output-dir=/
+xen.git/xen$ geninfo . -o cov.info
+xen.git/xen$ genhtml cov.info -o cov/
+xen.git/xen$ $BROWSER cov/index.html
+</pre></div>
+</div>
+</div>
+<div class="section" id="clang-coverage">
+<h2>Clang coverage<a class="headerlink" href="#clang-coverage" title="Permalink to this headline">¶</a></h2>
+<p>An example of how to view the data is as follows.</p>
+<ul class="simple">
+<li><p>Obtain the raw coverage data from the test host, and pull it back to the
+build working tree.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">llvm-profdata</span></code> to post-process the raw data.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">llvm-cov</span> <span class="pre">show</span></code> in combination with <code class="docutils literal notranslate"><span class="pre">xen-syms</span></code> from the build to
+render the results as HTML.</p></li>
+<li><p>View the results in a browser.</p></li>
+</ul>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>xen.git/xen$ ssh root@host xencov read &gt; xen.profraw
+xen.git/xen$ llvm-profdata merge xen.profraw -o xen.profdata
+xen.git/xen$ llvm-cov show -format=html -output-dir=cov/ xen-syms -instr-profile=xen.profdata
+xen.git/xen$ $BROWSER cov/index.html
+</pre></div>
+</div>
+<p>Full documentation on Clang’s coverage capabilities can be found at:
+<a class="reference external" href="https://clang.llvm.org/docs/SourceBasedCodeCoverage.html">https://clang.llvm.org/docs/SourceBasedCodeCoverage.html</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../admin-guide/microcode-loading.html" class="btn btn-neutral float-right" title="Microcode Loading" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="how-xen-boots.html" class="btn btn-neutral float-left" title="How Xen Boots" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,321 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ImageBuilder &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/features/index.html">Features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>ImageBuilder</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/reference/imagebuilder.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="imagebuilder">
+<h1>ImageBuilder<a class="headerlink" href="#imagebuilder" title="Permalink to this headline">¶</a></h1>
+<p>Building an embedded virtualized system with anything more than one domain can be difficult, error prone and time consuming.
+ImageBuilder, an Open Source collection of scripts, changes all that.</p>
+<p>ImageBuilder generates a U-Boot script that can be used to load all of the binaries automatically and boot the full system fast. Given a
+collection of binaries such as Xen, Dom0 and a number of Dom0-less DomUs, ImageBuilder takes care of calculating all loading addresses,
+editing device tree with the necessary information, and even pre-configuring a disk image with kernels and rootfses.</p>
+<p>ImageBuilder has been tested on Xilinx Zynq UltraScale+ MPSoC boards.</p>
+<p>ImageBuilder can be invoked as a container for build automation, but its useful scripts can also be called manually. Specifically, <cite>script/uboot-script-gen</cite> generates a U-Boot script that loads all the necessary binaries and automatically adds the required entries to device tree at boot time.</p>
+<p>The ImageBuilder script that generates a u-boot script to load all your binaries for a Xen Dom0-less setup is <cite>scripts/uboot-script-gen</cite>. To use it, first write a config file like config:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>MEMORY_START=&quot;0x0&quot;
+MEMORY_END=&quot;0x80000000&quot;
+
+DEVICE_TREE=&quot;mpsoc.dtb&quot;
+XEN=&quot;xen&quot;
+XEN_CMD=&quot;console=dtuart dtuart=serial0 dom0_mem=1G dom0_max_vcpus=1 bootscrub=0 vwfi=native sched=null&quot;
+DOM0_KERNEL=&quot;Image-dom0&quot;
+DOM0_CMD=&quot;console=hvc0 earlycon=xen earlyprintk=xen clk_ignore_unused&quot;
+DOM0_RAMDISK=&quot;dom0-ramdisk.cpio&quot;
+
+NUM_DOMUS=2
+DOMU_KERNEL[0]=&quot;zynqmp-dom1/Image-domU&quot;
+DOMU_RAMDISK[0]=&quot;zynqmp-dom1/domU-ramdisk.cpio&quot;
+DOMU_PASSTHROUGH_DTB[0]=&quot;zynqmp-dom1/passthrough-example-part.dtb&quot;
+DOMU_KERNEL[1]=&quot;zynqmp-dom2/Image-domU&quot;
+DOMU_RAMDISK[1]=&quot;zynqmp-dom2/domU-ramdisk.cpio&quot;
+DOMU_MEM[1]=512
+DOMU_VCPUS[1]=1
+
+UBOOT_SOURCE=&quot;boot.source&quot;
+UBOOT_SCRIPT=&quot;boot.scr&quot;
+</pre></div>
+</div>
+<p>where,</p>
+<ul class="simple">
+<li><p>MEMORY_START and MEMORY_END specify the start and end of RAM.</p></li>
+<li><p>DEVICE_TREE specifies the DTB file to load.</p></li>
+<li><p>XEN specifies the Xen hypervisor binary to load. Note that it has to be a regular Xen binary, not a u-boot binary.</p></li>
+<li><p>XEN_CMD specifies the command line arguments used for Xen.  If not set, the default one will be used.</p></li>
+<li><p>DOM0_KERNEL specifies the Dom0 kernel file to load.</p></li>
+<li><p>DOM0_CMD specifies the command line arguments for Dom0’s Linux kernel.  If <cite>“root=”</cite> isn’t set, imagebuilder will try to determine it If not set at all, the default one is used.</p></li>
+<li><p>DOM0_RAMDISK specifies the Dom0 ramdisk to use. Note that it should be a regular ramdisk <cite>cpio.gz</cite> file, not a u-boot binary.</p></li>
+<li><p>NUM_DOMUS specifies how many Dom0-less DomUs to load.</p></li>
+<li><p>DOMU_KERNEL[number] specifies the DomU kernel to use.</p></li>
+<li><p>DOMU_RAMDISK[number] specifies the DomU ramdisk to use.</p></li>
+<li><p>DOMU_PASSTHROUGH_DTB[number] specifies the device assignment configuration, see <cite>xen.git:docs/misc/arm/passthrough.txt</cite>.</p></li>
+<li><p>DOMU_MEM[number] is the amount of memory for the VM in MB, default 512MB</p></li>
+<li><p>DOMU_VCPUS[number] is the number of vcpus for the VM, default 1.</p></li>
+<li><p>UBOOT_SOURCE and UBOOT_SCRIPT specify the output. They are optional as you can pass -o FILENAME to uboot-script-gen as a command line parameter.</p></li>
+</ul>
+<div class="section" id="scripts-uboot-script-gen">
+<h2>scripts/uboot-script-gen<a class="headerlink" href="#scripts-uboot-script-gen" title="Permalink to this headline">¶</a></h2>
+<p>Once you have the config file, invoke uboot-script-gen as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ bash ./scripts/uboot-script-gen -c /path/to/config-file -d . -t tftp -o bootscript
+</pre></div>
+</div>
+<p>where,</p>
+<ul class="simple">
+<li><p><cite>-c</cite> specifies the path to the config file to use</p></li>
+<li><p><cite>-d</cite> specifies the “root” directory (paths in the config file are relative to it), this is not a working directory (any output file locations are specified in the config and any temporary files are in <cite>/tmp</cite>)</p></li>
+<li><p><cite>-t</cite> specifies the u-boot command to load the binaries. “tftp”, “sd” and “scsi” are shorthands for “tftpb”, “load mmc 0:1” and “load scsi 0:1”, but actually any arbitrary command can be used, for instance <cite>-t</cite> “fatload” is valid.</p></li>
+<li><p><cite>-o</cite> specifies the output filename for the uboot script and its source.</p></li>
+</ul>
+<p><cite>uboot-script-gen</cite> generates a U-Boot script named <cite>boot.scr</cite> that will load all your binaries automatically using tftp. All the path specified in the config file are relative to the directory passed as an argument to <cite>-d</cite>. In this case, Image-dom0 and <cite>dom1/Image-domU</cite> must be relative to the current directory, because we are passing <cite>-d .</cite> to <cite>uboot-script-gen</cite>.</p>
+</div>
+<div class="section" id="scripts-disk-image">
+<h2>scripts/disk_image<a class="headerlink" href="#scripts-disk-image" title="Permalink to this headline">¶</a></h2>
+<p>The ImageBuilder script that generates a disk image file to load on a SD or SATA drive.  This creates two partitions: boot partition where the boot files from working directory (<cite>-c</cite> option) are, and the dom0 ramdisk uncompressed into the root FS partition.</p>
+<p>After you’ve generated the u-boot scripts using the <cite>uboot-script-gen</cite> script, <cite>disk_image</cite> is run as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ sudo bash ./scripts/disk_image -c /path/to/config-file -d . \
+-w /path/to/tmp/dir          \
+-o /path/to/output/disk.img
+</pre></div>
+</div>
+<p>where,</p>
+<ul class="simple">
+<li><p><cite>-c</cite> specifies the path to the config file to use</p></li>
+<li><p><cite>-d</cite> specifies the working directory (paths in the config file are relative to it)</p></li>
+<li><p><cite>-w</cite> specifies the temporary working directory that the script uses for building the disk image, and if not set, one is created in /tmp</p></li>
+<li><p><cite>-o</cite> specifies the output disk image file name</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Building Xen on Arm &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuring Networking" href="configure-networking.html" />
+    <link rel="prev" title="Booting Xen from U-Boot" href="booting-xen-u-boot.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/features/index.html">Features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building Xen on Arm</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cross-compiling-xen">Cross Compiling Xen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-the-toolstack">Building the Toolstack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#native-building">Native Building</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Building Xen on Arm</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/tutorials/building-xen-arm.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-xen-on-arm">
+<h1>Building Xen on Arm<a class="headerlink" href="#building-xen-on-arm" title="Permalink to this headline">¶</a></h1>
+<p>There are two major components which need to be built for a Xen system. The Xen hypervisor binary itself and the Xen toolstack.</p>
+<div class="section" id="cross-compiling-xen">
+<h2>Cross Compiling Xen<a class="headerlink" href="#cross-compiling-xen" title="Permalink to this headline">¶</a></h2>
+<p>Cross compiling the Xen hypervisor is simple. Linaro supply cross compilers for both arm32 (<cite>arm-linux-gnueabihf-</cite>) and arm64 (<cite>aarch64-linux-gnu-</cite>) via <a class="reference external" href="https://launchpad.net/linaro-toolchain-binaries">linaro-toolchain-binaries</a>. Alternatively, for 32-bit at least, you can download the arm-unknown-linux-gnueabi compiler from <a class="reference external" href="http://www.kernel.org/pub/tools/crosstool/files/bin/x86_64/">kernel.org</a>.</p>
+<p>Once you have a suitable cross compiler you can compile Xen with:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ make dist-xen XEN_TARGET_ARCH=arm32 CROSS_COMPILE=arm-unknown-linux-gnueabihf-
+</pre></div>
+</div>
+<p>or,</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ make dist-xen XEN_TARGET_ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu-
+</pre></div>
+</div>
+<p>This assumes that the command prefix for you cross compiler is <cite>arm-unknown-linux-gnueabihf-</cite> or <cite>aarch64-linux-gnu-</cite> and that the appropriate <cite>arm-unknown-linux-gnueabihf-gcc</cite> or <cite>aarch64-linux-gnu-gcc</cite> and friends are in your <cite>$PATH</cite>.</p>
+</div>
+<div class="section" id="building-the-toolstack">
+<h2>Building the Toolstack<a class="headerlink" href="#building-the-toolstack" title="Permalink to this headline">¶</a></h2>
+<p>For a complete cross-compilation of the hypervisor and the toolstack, it is recommended to use Yocto, see Xen_on_ARM_and_Yocto. Alternatively, it is possible to use QEMU user to run an ARM64 chroot on a x86 host, i.e. an ARM64 Debian or Ubuntu container on a regular x86 laptop.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ apt-get install qemu-user-static
+</pre></div>
+</div>
+<p>It installs <cite>/usr/bin/qemu-aarch64-static</cite>.</p>
+<p>Next setup an ARM64 chroot environment on your x86 machine. Follow your distro recommandations. For instance, the following distros offer pre-packaged tarballs ready to be unpackged:</p>
+<ul class="simple">
+<li><p>Ubuntu: <a class="reference external" href="http://cdimage.ubuntu.com/ubuntu-base/releases/20.04/release/ubuntu-base-20.04-base-arm64.tar.gz">http://cdimage.ubuntu.com/ubuntu-base/releases/20.04/release/ubuntu-base-20.04-base-arm64.tar.gz</a></p></li>
+<li><p>Alpine Linux: <a class="reference external" href="http://dl-cdn.alpinelinux.org/alpine/v3.11/releases/aarch64/alpine-minirootfs-3.11.6-aarch64.tar.gz">http://dl-cdn.alpinelinux.org/alpine/v3.11/releases/aarch64/alpine-minirootfs-3.11.6-aarch64.tar.gz</a></p></li>
+</ul>
+<p>Assuming that the ARM64 chroot is under <cite>/chroot/distro_arm64</cite>, then you can:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cp /usr/bin/qemu-aarch64-static /chroot/distro_arm64/usr/bin/qemu-aarch64-static
+$ chroot /chroot/distro_arm64
+</pre></div>
+</div>
+<p>Now you have a full Arm64 environment running on a regular x86 machine. You can automate all the last steps with the following Docker command (the example is running Debian):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ docker run -it -v /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static arm64v8/debian /bin/bash
+</pre></div>
+</div>
+<p>Inside your ARM64 environment you can follow the regular native compilation steps:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ cd xen.git
+  # install build dependencies with apt-get/apk/yum etc.
+$ ./configure
+$ make -j4
+</pre></div>
+</div>
+</div>
+<div class="section" id="native-building">
+<h2>Native Building<a class="headerlink" href="#native-building" title="Permalink to this headline">¶</a></h2>
+<p>In order to build the tools a native build environment is required. For 32-bit the developers mainly use the armhf port of Debian, which is present in Wheezy running on an IMX53 based development board, although any ARMv7 development board would do. Note that the build hardware does not need to support the virtualisation extensions, since you don’t have to run Xen on the same system as where you build it.</p>
+<p>See <a class="reference external" href="https://xenproject.org/2020/09/29/xen-on-raspberry-pi-4-adventures/">Xen on Raspberry Pi</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="configure-networking.html" class="btn btn-neutral float-right" title="Configuring Networking" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="booting-xen-u-boot.html" class="btn btn-neutral float-left" title="Booting Xen from U-Boot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

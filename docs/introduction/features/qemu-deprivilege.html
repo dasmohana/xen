@@ -1,0 +1,438 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>QEMU Deprivileging / dm_restrict &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Credit Scheduler" href="sched_credit.html" />
+    <link rel="prev" title="Migration" href="migration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Features</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dom0less.html">Dom0less</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature-levelling.html">Feature Levelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intel_psr_cat_cdp.html">Intel Cache Allocation Technology and Code and Data Prioritization Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intel_psr_mba.html">Intel Memory Bandwidth Allocation (MBA) Feature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="livepatch.html">Live Patching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">QEMU Deprivileging / dm_restrict</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-details">User Details</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#getting-the-right-versions-of-software">Getting the Right Versions of Software</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-up-a-group-and-userid-range">Setting up a Group and UserID Range</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#domain-config-changes">Domain Config Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#technical-details">Technical Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changelog">Changelog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sched_credit.html">Credit Scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sched_credit2.html">Credit2 Scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sched_rtds.html">RTDS Scheduler</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Features</a> &raquo;</li>
+        
+      <li>QEMU Deprivileging / dm_restrict</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/introduction/features/qemu-deprivilege.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="qemu-deprivileging-dm-restrict">
+<h1>QEMU Deprivileging / dm_restrict<a class="headerlink" href="#qemu-deprivileging-dm-restrict" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Status: <strong>Tech Preview</strong></p></li>
+<li><p>Architecture(s): x86</p></li>
+<li><p>Component(s): toolstack</p></li>
+</ul>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>By default, the QEMU device model is run in domain 0.  If an attacker
+can gain control of a QEMU process, it could easily take control of a
+system.</p>
+<p>dm_restrict is a set of operations to restrict QEMU running in domain
+0.  It consists of two halves:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Mechanisms to restrict QEMU to only being able to affect its own</p></li>
+</ol>
+</div></blockquote>
+<dl class="simple">
+<dt>domain</dt><dd><ol class="arabic simple" start="2">
+<li><p>Mechanisms to restruct QEMU’s ability to interact with domain 0.</p></li>
+</ol>
+</dd>
+</dl>
+</div>
+<div class="section" id="user-details">
+<h2>User Details<a class="headerlink" href="#user-details" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getting-the-right-versions-of-software">
+<h3>Getting the Right Versions of Software<a class="headerlink" href="#getting-the-right-versions-of-software" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Linux: 4.11+</p></li>
+<li><p>Qemu: 3.0+ (Or the version that comes with Xen 4.12+)</p></li>
+</ul>
+</div>
+<div class="section" id="setting-up-a-group-and-userid-range">
+<h3>Setting up a Group and UserID Range<a class="headerlink" href="#setting-up-a-group-and-userid-range" title="Permalink to this headline">¶</a></h3>
+<p>For maximum security, libxl needs to run the devicemodel for each
+domain under a user id (UID) corresponding to its domain id.  There
+are 32752 possible domain IDs, and so libxl needs 32752 user ids set
+aside for it.  Setting up a group for all devicemodels to run at is
+also recommended.</p>
+<p>The simplest and most effective way to do this is to allocate a
+contiguous block of UIDs, and create a single user named
+<cite>xen-qemuuser-range-base</cite> with the first UID.  For example, under
+Debian:</p>
+<blockquote>
+<div><p>adduser –system –uid 131072 –group –no-create-home xen-qemuuser-range-base</p>
+</div></blockquote>
+<p>Two comments on this method:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Most modern systems have 32-bit UIDs, and so can in theory go up</p></li>
+</ol>
+</div></blockquote>
+<p>to 2^31 (or 2^32 if uids are unsigned).  POSIX only guarantees 16-bit
+UIDs however; UID 65535 is reserved for an invalid value, and 65534 is
+normally allocated to “nobody”.</p>
+<blockquote>
+<div><ol class="arabic simple" start="2">
+<li><p>Additionally, some container systems have proposed using the</p></li>
+</ol>
+</div></blockquote>
+<p>upper 16 bits of the uid for a container ID.  Using a multiple of 2^16
+for the range base (as is done above) will result in all UIDs being
+interpreted by such systems as a single container ID.</p>
+<p>Another, less-secure way is to run all QEMUs as the same UID.  To do
+this, create a user named <cite>xen-qemuuser-shared</cite>; for example:</p>
+<dl class="simple">
+<dt>::</dt><dd><p>adduser –no-create-home –system xen-qemuuser-shared</p>
+</dd>
+</dl>
+<p>A final way to set up a separate process for qemus is to allocate one
+UID per VM, and set the UID in the domain config file with the
+<cite>device_model_user</cite> argument.  For example, suppose you have a VM
+named <cite>c6-01</cite>.  You might do the following:</p>
+<dl class="simple">
+<dt>::</dt><dd><p>adduser –system –no-create-home –group xen-qemuuser-c6-01</p>
+</dd>
+</dl>
+<p>And then in your config file, the following line:</p>
+<dl class="simple">
+<dt>::</dt><dd><p>device_model_user=”xen-qemuuser-c6-01”</p>
+</dd>
+</dl>
+<p>If you use this method, you should also allocate one “reaper” user to
+be used for killing device models:</p>
+<dl class="simple">
+<dt>::</dt><dd><p>adduser –system –no-create-home –group xen-qemuuser-reaper</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is important when using <cite>device_model_user</cite> that EACH VM HAVE</p>
+</div>
+<p>A SEPARATE UID, and that none of these UIDs map to root.  xl will
+throw an error a uid maps to zero, but not if multiple VMs have the
+same uid.  Multiple VMs with the same device model uid will cause
+problems.</p>
+<p>It is also important that <cite>xen-qemuuser-reaper</cite> not have any processes
+associated with it, as they will be destroyed when deprivileged qemu
+processes are destroyed.</p>
+</div>
+<div class="section" id="domain-config-changes">
+<h3>Domain Config Changes<a class="headerlink" href="#domain-config-changes" title="Permalink to this headline">¶</a></h3>
+<p>The core domain config change is to add the following line to the
+domain configuration:</p>
+<blockquote>
+<div><p>dm_restrict=1</p>
+</div></blockquote>
+<p>This will perform a number of restrictions, outlined below in the
+‘Technical details’ section.</p>
+</div>
+</div>
+<div class="section" id="technical-details">
+<h2>Technical Details<a class="headerlink" href="#technical-details" title="Permalink to this headline">¶</a></h2>
+<p>See docs/design/qemu-deprivilege.md for technical details.</p>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>The following features still need to be implemented:</p>
+<ul class="simple">
+<li><p>Inserting a new cdrom while the guest is running (xl cdrom-insert)</p></li>
+<li><p>Support for qdisk backends</p></li>
+</ul>
+<p>A number of restrictions still need to be implemented.  A compromised
+device model may be able to do the following:</p>
+<ul class="simple">
+<li><p>Delay or exploit weaknesses in the toolstack</p></li>
+<li><p>Launch “fork bombs” or other resource exhaustion attacks</p></li>
+<li><p>Make network connections on the management network</p></li>
+<li><p>Break out of the restrictions after migration</p></li>
+</ul>
+<p>Additionally, getting PCI passthrough to work securely would require a
+significant rework of how passthrough works at the moment.  It may be
+implemented at some point but is not a near-term priority.</p>
+<p>See SUPPORT.md for security support status.</p>
+</div>
+<div class="section" id="changelog">
+<h2>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Date</p></th>
+<th class="head"><p>Rev
+ision</p></th>
+<th class="head"><p>Ve
+rsion</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2018
+-09-14</p></td>
+<td><p>1</p></td>
+<td><p>Xen
+4.12</p></td>
+<td><p>Imported from docs/misc</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="sched_credit.html" class="btn btn-neutral float-right" title="Credit Scheduler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="migration.html" class="btn btn-neutral float-left" title="Migration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

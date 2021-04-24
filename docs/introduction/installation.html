@@ -1,0 +1,553 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Installation &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Features" href="features/index.html" />
+    <link rel="prev" title="Xen Architecture" href="architecture.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-the-xen-project-software-on-distro">Installing the Xen Project Software on Distro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-the-xen-project-from-source">Installing the Xen Project from Source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-and-installing-xen">Building and Installing Xen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xenstore-xenstored-and-oxenstored">xenstore: xenstored and oxenstored</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-runtime-libraries">Python Runtime Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#intel-r-trusted-execution-technology-support">Intel(R) Trusted Execution Technology Support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-the-xen-project-software-using-yocto">Installing the Xen Project Software using Yocto</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#obtaining-the-source-code">Obtaining the Source Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preparing-the-build-tree">Preparing the Build Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building">Building</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#targeting-hardware-platforms">Targeting Hardware Platforms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-with-a-local-copy-of-the-xen-source-code">Building with a Local Copy of the Xen Source Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="features/index.html">Features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/introduction/installation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="installing-the-xen-project-software-on-distro">
+<h2>Installing the Xen Project Software on Distro<a class="headerlink" href="#installing-the-xen-project-software-on-distro" title="Permalink to this headline">¶</a></h2>
+<p>The Debian Xen Project packages consist primarily of a Xen Project-enabled Linux kernel, the hypervisor itself, a modified version of QEMU that support the hypervisor’s HVM mode and a set of userland tools.</p>
+<p>All of this can be installed via an Apt meta-package called xen-linux-system. A meta-package is basically a way of installing a group of packages automatically. Apt will of course resolve all dependencies and bring in all the extra libraries we need.</p>
+<p>Let’s install the xen-linux-system meta-package:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>apt-get install xen-system-amd64
+</pre></div>
+</div>
+<p>Now we have a Xen Project hypervisor, a Xen Project kernel and the userland tools installed. When you next boot the system, the boot menu should include entries for starting Debian with the Xen hypervisor. One of them should be highlighted, to start Xen by default. Do that now, logging in as root again.</p>
+<p>Next, let’s check to see if virtualization is enabled in the BIOS. There are a few ways to do that.</p>
+<p>The most comprehensive is to review the Xen section of dmesg created during the boot process. This will be your first use of xl, the very versatile Xen tool, which we will come back to shortly to create and manage domUs:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>xl dmesg
+</pre></div>
+</div>
+<p>Included in the output will be references to the CPU flags set in the BIOS to enable virtualization: ‘vmx’ for Intel, ‘svm’ for AMD. It will also detail other hardware virtualization extensions: VT-d features, Hardware Assisted Paging (HAP), I/O Virtualization and so on.</p>
+<p>Another way is to check the flags set in the CPU on boot:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>egrep &#39;(vmx|svm|hypervisor)&#39; /proc/cpuinfo
+</pre></div>
+</div>
+<p>egrep will return any line containing one or more of those same text fragments (vmx/svm or more recently, just ‘hypervisor’). If nothing comes back and you think it should, you may wish to look through the flags yourself:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cat /proc/cpuinfo
+</pre></div>
+</div>
+<p>If the virtualization extensions don’t appear, take a closer look at the BIOS settings. A few round-trips through the BIOS are often required to get all the bits working right.</p>
+</div>
+<div class="section" id="installing-the-xen-project-from-source">
+<h2>Installing the Xen Project from Source<a class="headerlink" href="#installing-the-xen-project-from-source" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Prerequisites<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>A number of prerequisites are required for building a Xen source release. Ensure that you have all the following installed, either by visiting the project webpage or installing a pre-built package provided by your OS distributor:</p>
+<blockquote>
+<div><ul>
+<li><p>GNU Make v3.80 or later</p></li>
+<li><p>C compiler and linker:
+- For x86:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>GCC 4.1.2_20070115 or later</p></li>
+<li><p>GNU Binutils 2.16.91.0.5 or later</p></li>
+</ul>
+<p>or
+- Clang/LLVM 3.5 or later</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>For ARM:
+- GCC 4.8 or later
+- GNU Binutils 2.24 or later</p></li>
+</ul>
+</li>
+<li><p>Development install of zlib (e.g., zlib-dev)</p></li>
+<li><p>Development install of Python 2.6 or later (e.g., python-dev)</p></li>
+<li><p>Development install of curses (e.g., libncurses-dev)</p></li>
+<li><p>Development install of openssl (e.g., openssl-dev)</p></li>
+<li><p>Development install of x11 (e.g. xorg-x11-dev)</p></li>
+<li><p>Development install of uuid (e.g. uuid-dev)</p></li>
+<li><p>Development install of yajl (e.g. libyajl-dev)</p></li>
+<li><p>Development install of libaio (e.g. libaio-dev) version 0.3.107 or greater.</p></li>
+<li><p>Development install of GLib v2.0 (e.g. libglib2.0-dev)</p></li>
+<li><p>Development install of Pixman (e.g. libpixman-1-dev)</p></li>
+<li><p>pkg-config</p></li>
+<li><p>bridge-utils package (/sbin/brctl)</p></li>
+<li><p>iproute package (/sbin/ip)</p></li>
+<li><p>GNU bison and GNU flex</p></li>
+<li><p>GNU gettext</p></li>
+<li><p>ACPI ASL compiler (iasl)</p></li>
+</ul>
+</div></blockquote>
+<p>In addition to the above, there are a number of optional build prerequisites. Omitting these will cause the related features to be disabled at compile time:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Development install of Ocaml (e.g. ocaml-nox and ocaml-findlib). Required to build ocaml components which includes the alternative ocaml xenstored.</p></li>
+<li><p>cmake (if building vtpm stub domains)</p></li>
+<li><p>pandoc, transfig, pod2{man,html,text} for rendering various pieces of documentation into alternative formats</p></li>
+<li><p>figlet (for generating the traditional Xen start of day banner)</p></li>
+<li><p>systemd daemon development files</p></li>
+<li><p>Development install of libnl3 (e.g., libnl-3-200, libnl-3-dev, etc). Required if network buffering is desired when using Remus with libxl.  See docs/README.remus for detailed information.</p></li>
+<li><p>16-bit x86 assembler, loader and compiler for qemu-traditional / rombios (dev86 rpm or bin86 &amp; bcc debs)</p></li>
+<li><p>Development install of liblzma for rombios</p></li>
+<li><p>Development install of libbz2, liblzma, liblzo2, and libzstd for DomU kernel decompression.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You need to acquire a suitable kernel for use in domain 0. If possible, use a kernel provided by your OS distributor. If no suitable kernel is available from your OS distributor then refer to <a class="reference external" href="https://wiki.xen.org/wiki/XenDom0Kernels">Xen Dom0 Kernels</a> for suggestions for suitable kernels to use. If you are looking to compile a Dom0 kernel from source, see <a class="reference external" href="https://wiki.xen.org/wikiXenParavirtOps">XenParavirtOps</a>.</p>
+</div>
+</div>
+<div class="section" id="building-and-installing-xen">
+<h3>Building and Installing Xen<a class="headerlink" href="#building-and-installing-xen" title="Permalink to this headline">¶</a></h3>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Unless noted otherwise, all the following steps should be</p>
+</div>
+<p>performed with root privileges.</p>
+<ol class="arabic">
+<li><p>Download and untar the source tarball file. This will be a
+file named xen-unstable-src.tgz, or xen-$version-src.tgz.
+You can also pull the current version from the git or mercurial
+repositories at <a class="reference external" href="https://xenbits.xen.org/">https://xenbits.xen.org/</a>.</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span># tar xzf xen-unstable-src.tgz
+</pre></div>
+</div>
+</div></blockquote>
+<p>Assuming you are using the unstable tree, this will untar into xen-unstable. The rest of the instructions
+use the unstable tree as an example, substitute the version for unstable.</p>
+</li>
+<li><p>cd to xen-unstable (or, whatever you have renamed it to).</p></li>
+<li><p>For the very first build, or if you want to destroy build trees, perform the following steps:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span># ./configure
+# make world
+# make install
+</pre></div>
+</div>
+</div></blockquote>
+<p>See the documentation in the INSTALL file for more information.</p>
+<p>This will create and install onto the local machine. It will build
+the xen binary (xen.gz), the tools and the documentation.</p>
+<p>You can override the destination for make install by setting DESTDIR
+to some value.</p>
+</li>
+<li><p>To rebuild an existing tree without modifying the config:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span># make dist
+</pre></div>
+</div>
+</div></blockquote>
+<p>This will build and install xen, tools, and docs into the local dist/
+directory.</p>
+<p>You can override the destination for make install by setting DISTDIR
+to some value.</p>
+<p>make install and make dist differ in that make install does the
+right things for your local machine (installing the appropriate
+version of udev scripts, for example), but make dist includes all
+versions of those scripts, so that you can copy the dist directory
+to another machine and install from that distribution.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="xenstore-xenstored-and-oxenstored">
+<h3>xenstore: xenstored and oxenstored<a class="headerlink" href="#xenstore-xenstored-and-oxenstored" title="Permalink to this headline">¶</a></h3>
+<p>Xen uses a configuration database called xenstore [0] to maintain configuration and status information shared between domains. A daemon is implemented as part of xenstore to act as an interface for access to the database for dom0 and guests. Two xenstored daemons are supported, one written in C which we refer
+to as the xenstored (sometimes referred to as cxenstored), and another written in Ocaml called oxenstored. Details for xenstore and the different implementations can be found on the wiki’s xenstore reference guide [1] and the xenstored [2] page. You can choose which xenstore you want to enable as default on a system through configure:</p>
+<blockquote>
+<div><p>./configure –with-xenstored=xenstored
+./configure –with-xenstored=oxenstored</p>
+</div></blockquote>
+<p>By default oxenstored will be used if the ocaml development tools are found.
+If you enable oxenstored the xenstored will still be built and installed,
+the xenstored used can be changed through the configuration file:</p>
+<p>/etc/sysconfig/xencommons
+or
+/etc/default/xencommons</p>
+<p>You can change the preferred xenstored you want to use in the configuration
+but since we cannot stop the daemon a reboot will be required to make the
+change take effect.</p>
+<p>[0] <a class="reference external" href="https://wiki.xen.org/wiki/XenStore">https://wiki.xen.org/wiki/XenStore</a>
+[1] <a class="reference external" href="https://wiki.xen.org/wiki/XenStoreReference">https://wiki.xen.org/wiki/XenStoreReference</a>
+[2] <a class="reference external" href="https://wiki.xen.org/wiki/Xenstored">https://wiki.xen.org/wiki/Xenstored</a></p>
+</div>
+<div class="section" id="python-runtime-libraries">
+<h3>Python Runtime Libraries<a class="headerlink" href="#python-runtime-libraries" title="Permalink to this headline">¶</a></h3>
+<p>Various tools, such as pygrub, have the following runtime dependencies:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Python 2.6 or later.</dt><dd><p>URL:    <a class="reference external" href="http://www.python.org/">http://www.python.org/</a>
+Debian: python</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>Note that the build system expects <cite>python</cite> to be available. If your system only has <cite>python2</cite> or <cite>python3</cite> but not <cite>python</cite> (as in Linux From Scratch), you will need to create a symlink for it, or specify PYTHON= when invoking make, like (note the position of PYTHON= matters):</p>
+<blockquote>
+<div><p># make PYTHON=/usr/bin/python3</p>
+</div></blockquote>
+</div>
+<div class="section" id="intel-r-trusted-execution-technology-support">
+<h3>Intel(R) Trusted Execution Technology Support<a class="headerlink" href="#intel-r-trusted-execution-technology-support" title="Permalink to this headline">¶</a></h3>
+<p>Intel’s technology for safer computing, Intel(R) Trusted Execution Technology (Intel(R) TXT), defines platform-level enhancements that provide the building blocks for creating trusted platforms.  For more information, see <a class="reference external" href="http://www.intel.com/technology/security/">http://www.intel.com/technology/security/</a>.</p>
+<p>Intel(R) TXT support is provided by the Trusted Boot (tboot) module in conjunction with minimal logic in the Xen hypervisor.</p>
+<p>Tboot is an open source, pre- kernel/VMM module that uses Intel(R) TXT to perform a measured and verified launch of an OS kernel/VMM.</p>
+<p>The Trusted Boot module is available from <a class="reference external" href="http://sourceforge.net/projects/tboot">http://sourceforge.net/projects/tboot</a>. This project hosts the code in a mercurial repo at <a class="reference external" href="http://tboot.sourceforge.net/hg/tboot.hg">http://tboot.sourceforge.net/hg/tboot.hg</a> and contains tarballs of the source.  Instructions in the tboot README describe how to modify <cite>grub.conf</cite> to use tboot to launch Xen.</p>
+</div>
+</div>
+<div class="section" id="installing-the-xen-project-software-using-yocto">
+<h2>Installing the Xen Project Software using Yocto<a class="headerlink" href="#installing-the-xen-project-software-using-yocto" title="Permalink to this headline">¶</a></h2>
+<p>Follow these instructions to cross-compile a hypervisor and minimal Dom0 filesystem image containing the Xen tools for the ARM64 QEMU emulator. The instructions are similar for other ARM64 platforms.</p>
+<div class="section" id="obtaining-the-source-code">
+<h3>Obtaining the Source Code<a class="headerlink" href="#obtaining-the-source-code" title="Permalink to this headline">¶</a></h3>
+<p>We will use the Yocto stable release, “Dunfell”:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ git clone -b dunfell http://git.yoctoproject.org/git/poky
+$ cd poky
+$ git clone -b dunfell http://git.openembedded.org/meta-openembeddded
+$ git clone -b dunfell http://git.yoctoproject.org/git/meta-virtualization
+</pre></div>
+</div>
+</div>
+<div class="section" id="preparing-the-build-tree">
+<h3>Preparing the Build Tree<a class="headerlink" href="#preparing-the-build-tree" title="Permalink to this headline">¶</a></h3>
+<p>Initialize your shell to be ready to build - this will generate basic configuration files when you do this the first time:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ source ./oe-init-build-env
+</pre></div>
+</div>
+<p>Edit <cite>conf/bblayers.conf</cite>, to add the source code layers needed. /scratch/repos/poky is the directory where you cloned the poky source code to - you will need to adjust the example paths here to match your directory layout:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>BBLAYERS ?= &quot; \
+/scratch/repos/poky/meta \
+/scratch/repos/poky/meta-poky \
+/scratch/repos/poky/meta-yocto-bsp \
+/scratch/repos/poky/meta-openembedded/meta-oe \
+/scratch/repos/poky/meta-openembedded/meta-filesystems \
+/scratch/repos/poky/meta-openembedded/meta-python \
+/scratch/repos/poky/meta-openembedded/meta-networking \
+/scratch/repos/poky/meta-virtualization \
+&quot;
+</pre></div>
+</div>
+<p>The <cite>conf/local.conf</cite> file contains instructions for the variables that it sets. You should review and make sure to set:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>DL_DIR           -- set this to a local download directory for retrieved tarballs or other source code files
+SSTATE_DIR       -- set to a local directory for build cache files to speed up subsequent builds
+PACKAGE_CLASSES  -- package_ipk can be a good choice for package format
+</pre></div>
+</div>
+<p>Then add the following to the same file, or make sure that the values here match if the variables are already present in the file:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>MACHINE = &quot;qemuarm64&quot;
+DISTRO = &quot;poky&quot;
+IMAGE_FSTYPES += &quot;cpio.gz&quot;
+QEMU_TARGETS = &quot;i386 aarch64&quot;
+DISTRO_FEATURES += &quot; virtualization xen&quot;
+BUILD_REPRODUCIBLE_BINARIES = &quot;1&quot;
+</pre></div>
+</div>
+<p>This configuration will enable OpenEmbedded’s support for reproducible builds. It also reduces the number of emulation platforms for QEMU to significantly reduce build time.</p>
+<p>If you would like to build QEMU to provide PV backends, such as disk and 9pfs, then you need to add:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PACKAGECONFIG_pn-qemu += &quot; virtfs xen fdt&quot;
+</pre></div>
+</div>
+<p>Sdl is enabled by default in the Xen build of QEMU but it is not actually necessary and can be disabled with:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PACKAGECONFIG_remove_pn-qemu += &quot; sdl&quot;
+</pre></div>
+</div>
+</div>
+<div class="section" id="building">
+<h3>Building<a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ bitbake xen-image-minimal
+</pre></div>
+</div>
+<p>When the build is completed, the output image file will be in build/tmp/deploy/images.</p>
+</div>
+<div class="section" id="targeting-hardware-platforms">
+<h3>Targeting Hardware Platforms<a class="headerlink" href="#targeting-hardware-platforms" title="Permalink to this headline">¶</a></h3>
+<p>If you are targetting a specific ARM hardware platform, you will likely need to add the “BSP layer”, which contains the MACHINE definition for the hardware, and any closely related software such as bootloader configuration. The MACHINE variable needs to be set to match the hardware definition. You may also add additional layers containing related support software, if any.</p>
+<p>TODO: instructions in this section are still pending validation for Dunfell</p>
+<p>eg. For the Raspberry Pi 4:</p>
+<p>In your poky directory, add the BSP layer:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ git clone -b dunfell https://git.yoctoproject.org/git/meta-raspberrypi
+</pre></div>
+</div>
+<p>In <cite>local.conf</cite>, set:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>MACHINE = &quot;raspberrypi4-64&quot;
+</pre></div>
+</div>
+<p>In bblayers.conf, add:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>BBLAYERS_append = &quot; /scratch/repos/poky/meta-raspberrypi&quot;
+</pre></div>
+</div>
+<p>Then, perform your build as before.</p>
+</div>
+<div class="section" id="building-with-a-local-copy-of-the-xen-source-code">
+<h3>Building with a Local Copy of the Xen Source Code<a class="headerlink" href="#building-with-a-local-copy-of-the-xen-source-code" title="Permalink to this headline">¶</a></h3>
+<p>TODO: instructions in this section are still pending validation for Dunfell</p>
+<p>If you are building a local copy of a Xen source tree, you can add to <cite>local.conf</cite>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>INHERIT_pn-xen += &quot;externalsrc&quot;
+INHERIT_pn-xen-tools += &quot;externalsrc&quot;
+EXTERNALSRC_pn-xen = &quot;/scratch/repos/xen&quot;
+EXTERNALSRC_pn-xen-tools = &quot;/scratch/repos/xen&quot;
+EXTERNALSRC_BUILD_pn-xen = &quot;/scratch/repos/xen&quot;
+EXTERNALSRC_BUILD_pn-xen-tools = &quot;/scratch/repos/xen&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="features/index.html" class="btn btn-neutral float-right" title="Features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="architecture.html" class="btn btn-neutral float-left" title="Xen Architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

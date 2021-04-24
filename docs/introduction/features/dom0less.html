@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Dom0less &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Feature Levelling" href="feature-levelling.html" />
+    <link rel="prev" title="Features" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Features</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Dom0less</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#booting-multiple-domains-from-device-tree">Booting Multiple Domains from Device Tree</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="feature-levelling.html">Feature Levelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intel_psr_cat_cdp.html">Intel Cache Allocation Technology and Code and Data Prioritization Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intel_psr_mba.html">Intel Memory Bandwidth Allocation (MBA) Feature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="livepatch.html">Live Patching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qemu-deprivilege.html">QEMU Deprivileging / dm_restrict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sched_credit.html">Credit Scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sched_credit2.html">Credit2 Scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sched_rtds.html">RTDS Scheduler</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Features</a> &raquo;</li>
+        
+      <li>Dom0less</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/introduction/features/dom0less.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dom0less">
+<h1>Dom0less<a class="headerlink" href="#dom0less" title="Permalink to this headline">¶</a></h1>
+<p>“Dom0less” is a set of Xen features that enable the deployment of a Xen
+system without an control domain (often referred to as “dom0”). Each
+feature can be used independently from the others, unless otherwise
+stated.</p>
+<div class="section" id="booting-multiple-domains-from-device-tree">
+<h2>Booting Multiple Domains from Device Tree<a class="headerlink" href="#booting-multiple-domains-from-device-tree" title="Permalink to this headline">¶</a></h2>
+<p>This feature enables Xen to create a set of DomUs at boot time.
+Information about the DomUs to be created by Xen is passed to the
+hypervisor via Device Tree. Specifically, the existing Device Tree based
+Multiboot specification has been extended to allow for multiple domains
+to be passed to Xen. See docs/misc/arm/device-tree/booting.txt for more
+information about the Multiboot specification and how to use it.</p>
+<p>Currently, a control domain (“dom0”) is still required, but in the
+future it will become unnecessary when all domains are created
+directly from Xen. Instead of waiting for the control domain to be fully
+booted and the Xen tools to become available, domains created by Xen
+this way are started right away in parallel. Hence, their boot time is
+typically much shorter.</p>
+<div class="section" id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="loading-binaries-into-memory">
+<h4>Loading Binaries into Memory<a class="headerlink" href="#loading-binaries-into-memory" title="Permalink to this headline">¶</a></h4>
+<p>U-Boot needs to load not just Xen, the device tree binary, the dom0 kernel and
+ramdisk. It also needs to load the kernel and ramdisk of any additional domains
+to boot. For example if this is the bootcmd for Xen and Dom0:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>tftpb 0x1280000 xen.dtb
+tftpb 0x0x80000 xen-Image
+tftpb 0x1400000 xen.ub
+tftpb 0x9000000 xen-rootfs.cpio.gz.u-boot
+
+bootm 0x1400000 0x9000000 0x1280000
+</pre></div>
+</div>
+<p>If we want to add one DomU with Image-DomU as the DomU kernel
+and ramdisk-DomU as DomU ramdisk:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>tftpb 0x1280000 xen.dtb
+tftpb 0x80000 xen-Image
+tftpb 0x1400000 xen.ub
+tftpb 0x9000000 xen-rootfs.cpio.gz.u-boot
+
+tftpb 0x2000000 Image-DomU
+tftpb 0x3000000 ramdisk-DomU
+
+bootm 0x1400000 0x9000000 0x1280000
+</pre></div>
+</div>
+</div>
+<div class="section" id="device-tree-configuration">
+<h4>Device Tree Configuration<a class="headerlink" href="#device-tree-configuration" title="Permalink to this headline">¶</a></h4>
+<p>In addition to loading the necessary binaries, we also need to advertise
+the presence of the additional VM and its configuration. It is done via
+device tree adding a node under /chosen as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>domU1 {
+    #address-cells = &lt;1&gt;;
+    #size-cells = &lt;1&gt;;
+    compatible = &quot;xen,domain&quot;;
+    memory = &lt;0 0x20000&gt;;
+    cpus = &lt;1&gt;;
+    vpl011;
+
+    module@2000000 {
+        compatible = &quot;multiboot,kernel&quot;, &quot;multiboot,module&quot;;
+        reg = &lt;0x2000000 0xffffff&gt;;
+        bootargs = &quot;console=ttyAMA0&quot;;
+    };
+
+    module@30000000 {
+        compatible = &quot;multiboot,ramdisk&quot;, &quot;multiboot,module&quot;;
+        reg = &lt;0x3000000 0xffffff&gt;;
+    };
+};
+</pre></div>
+</div>
+<p>Where memory is the memory of the VM in KBs, cpus is the number of
+cpus. <a class="reference external" href="mailto:module&#37;&#52;&#48;2000000">module<span>&#64;</span>2000000</a> and <a class="reference external" href="mailto:module&#37;&#52;&#48;3000000">module<span>&#64;</span>3000000</a> advertise where the kernel and
+ramdisk are in memory.</p>
+<p>Note: the size specified should exactly match the size of the Kernel/initramfs.
+Otherwise, they may be unusable in Xen (for instance if they are compressed).</p>
+<p>See docs/misc/arm/device-tree/booting.txt for more information.</p>
+</div>
+</div>
+<div class="section" id="limitations">
+<h3>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h3>
+<p>Domains started by Xen at boot time currently have the following
+limitations:</p>
+<ul class="simple">
+<li><p>They cannot be properly shutdown or rebooted using xl. If one of them
+crashes, the whole platform should be rebooted.</p></li>
+<li><p>Some xl operations might not work as expected. xl is meant to be used
+with domains that have been created by it. Using xl with domains
+started by Xen at boot might not work as expected.</p></li>
+<li><p>The GIC version is the native version. In absence of other
+information, the GIC version exposed to the domains started by Xen at
+boot is the same as the native GIC version.</p></li>
+<li><p>No PV drivers. There is no support for PV devices at the moment. All
+devices need to be statically assigned to guests.</p></li>
+<li><p>Pinning vCPUs of domains started by Xen at boot can be
+done from the control domain, using <cite>xl vcpu-pin</cite> as usual. It is not
+currently possible to configure vCPU pinning without a control domain.
+However, the NULL scheduler can be selected by passing <cite>sched=null</cite> to
+the Xen command line. The NULL scheduler automatically assigns and
+pins vCPUs to pCPUs, but the vCPU-pCPU assignments cannot be
+configured.</p></li>
+</ul>
+</div>
+<div class="section" id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p><cite>xl console</cite> command will not attach to the domain’s console in case
+of dom0less. DomU are domains created by Xen (similar to Dom0) and
+therefore they are all managed by Xen and some of the commands may not work.</p>
+<p>A user is allowed to configure the key sequence to switch input.
+Pressing the Xen “conswitch” (Ctrl-A by default) three times
+switches input in case of dom0less mode.</p>
+</li>
+<li><p>Domains created by Xen will have no name at boot. Domain-0 has a name
+thanks to the helper xen-init-dom0 called at boot by the initscript.
+If you want to setup DomU name, then you will have to create the xenstore
+node associated. By default DomU names are shown as ‘(null)’ in the
+xl domains list.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="feature-levelling.html" class="btn btn-neutral float-right" title="Feature Levelling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

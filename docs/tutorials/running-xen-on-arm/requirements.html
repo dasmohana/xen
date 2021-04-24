@@ -1,0 +1,388 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Requirements &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/features/index.html">Features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../booting-xen-u-boot.html">Booting Xen from U-Boot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/how-xen-boots.html">How Xen Boots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../admin-guide/microcode-loading.html">Microcode Loading</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Requirements</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/tutorials/running-xen-on-arm/requirements.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="requirements">
+<h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general-requirements">
+<h2>General Requirements<a class="headerlink" href="#general-requirements" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="simple">
+<dt>ARM Hardware or Software Model</dt><dd><p>See the following sections for information on hardware and models which are supported.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Firmware</dt><dd><p>Xen requires certain functionality from the system firmware. The primary requirement is that the hypervisor must be launched in Non-Secure Hypervisor mode only. If the stock firmware on a platform does not obey this (most commonly by launching in Secure Supervisor mode) then a firmware update may be required. This support is present in U-Boot 2014.01.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Booting secondary processors on an SMP system requires firmware support for the Power State Coordination Interfaces (PSCI). Initial U-Boot support for this interface is available in <a class="reference external" href="https://git.kernel.org/cgit/linux/kernel/git/maz/u-boot.git/log/?h=wip/psci">https://git.kernel.org/cgit/linux/kernel/git/maz/u-boot.git/log/?h=wip/psci</a>.</p>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Device Tree</dt><dd><p>A device tree in the flat device tree format (.dtb). The host platform must be described in a DTB binary passed to Xen at boot time. This will be used by Xen and Dom0. Normally the regular device tree used when booting natively on the platform should be used.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Xen</dt><dd><p>All current work is now merged into the current development branch git://xenbits.xen.org/xen.git. It is recommended to use the latest Xen master branch.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Linux Kernel for dom0</dt><dd><p>The patches necessary to boot Linux as dom0 under Xen were merged upstream in v3.7. In order to actually start guests a few additional patches were required however these patches have now been included in the v3.8 Linux release. The latest Linus’ tree has everything needed to run on Xen on ARM as dom0 and domU. It is recommended to use the latest Linux release where possible.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>dom0 userspace</dt><dd><p>The developers are using the armhf port of Debian Wheezy.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>domU kernel</dt><dd><p>The patches necessary to boot Linux as a guest under Xen were merged upstream in v3.7.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="requirements-for-booting-natively">
+<h2>Requirements for Booting Natively<a class="headerlink" href="#requirements-for-booting-natively" title="Permalink to this headline">¶</a></h2>
+<p>Before starting to load Xen it is highly recommended to get the kernel you intend to use as dom0 booting natively (i.e., without Xen underneath). This will let you iron out any driver issues and figure out the necessary kernel command line etc before adding Xen into the mix.</p>
+</div>
+<div class="section" id="requirements-for-booting-xen">
+<h2>Requirements for Booting Xen<a class="headerlink" href="#requirements-for-booting-xen" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="simple">
+<dt>ImageBuilder</dt><dd><p>Many of the details necessary to boot Xen from U-Boot can be generated automatically by ImageBuilder’s <cite>uboot-script-gen</cite>, see <a class="reference external" href="..referenceimagebuilder.rst">ImageBuilder</a>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Boot Protocol</dt><dd><p>Boot requirements are described in <a class="reference external" href="../tutorials/booting-xen-u-boot.rst">Booting Xen from U-Boot</a> in the Xen tree, which references the Linux arm and arm64 booting documentation.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Device Trees</dt><dd><p>Xen needs the device trees to be in the flat device tree format (the device tree blob or DTB).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is no longer necessary to build a specific DTB for use with Xen. The Device Tree files shipped with Linux or from the Split Device Tree Repository can be used.</p>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Boot Modules</dt><dd><p>At boot time Xen must be provided with a dom0 kernel blob and an optional dom0 initramfs blob. The bootloader must load these into memory and describe their location in the Device Tree Blob using the bindings specified in <a class="reference external" href="../tutorials/booting-xen-u-boot.rst">Booting Xen from U-Boot</a>.</p>
+<p>These nodes can either be added by hand (by editing and recompiling the .dts file) or by using the <cite>fdt</cite> command in U-Boot to add them dynamically at boot time:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fdt addr ${fdt_addr}
+fdt resize
+
+fdt set /chosen \#address-cells &lt;1&gt;
+fdt set /chosen \#size-cells &lt;1&gt;
+
+fdt mknod /chosen module@0
+fdt set /chosen/module@0 compatible &quot;xen,linux-zimage&quot; &quot;xen,multiboot-module&quot;
+fdt set /chosen/module@0 reg &lt;${kernel_addr_r} 0x${filesize} &gt;
+fdt set /chosen/module@0 bootargs &quot;&lt;DOMAIN 0 COMMAND LINE&gt;&quot;
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Command Lines</dt><dd><p><a class="reference external" href="../tutorials/booting-xen-u-boot.rst">Booting Xen from U-Boot</a> describes where Xen looks for both its own command line and the command line to pass to domain 0.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="getting-xen-output">
+<h3>Getting Xen Output<a class="headerlink" href="#getting-xen-output" title="Permalink to this headline">¶</a></h3>
+<p>To get output log on the UART, Xen needs to know which UART to use. This should be passed in the hypervisor command line using the “dtuart” parameter. e.g.:</p>
+<p>where, myserial is either an alias to the UART in the device tree (aliases are found in the aliases device tree node) or a full DTB path to the device. As Xen already uses it the UART will be disabled from the point of view of domain 0.</p>
+<p>For instance, this is a dummy device tree (won’t work) to use the uart0 in Xen:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{
+    choosen {
+    bootargs = &quot;console=dtuart dtuart=myserial&quot;;
+    }
+    aliases {
+        myserial = &amp;myserial_0;
+    }
+    myserial_0: uart0 {
+    ... configuration of your UART ...
+    }
+}
+</pre></div>
+</div>
+<p>Here dtuart is configured using the myserial alias. Alternatively /uart0 (the full path to the device) could have been used.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you don’t see output from Xen, you can enable early printk. This option will turn on platform specific UART and output information before the console is initialized.</p>
+</div>
+</div>
+</div>
+<div class="section" id="dom0-kernel">
+<h2>Dom0 Kernel<a class="headerlink" href="#dom0-kernel" title="Permalink to this headline">¶</a></h2>
+<p>In general the same kernel configuration as used to boot natively, plus turning on the Xen specific options should work. A good starting point is often the “multi_v7_defconfig” + Xen options.</p>
+<p>If ARM_APPENDED_DTB is enabled then any appended DTB will be used instead of one supplied by Xen and the kernel will crash unless the memory in the DTB matches that location/size supplied by Xen. It is strongly recommended not to append a DTB to your dom0 kernel (or to disable APPENDED_DTB).</p>
+</div>
+<div class="section" id="domu-kernel-and-dts">
+<h2>DomU kernel and DTS<a class="headerlink" href="#domu-kernel-and-dts" title="Permalink to this headline">¶</a></h2>
+<p>Unprivileged guests can be created using xl. A simple VM config file would look like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>kernel = &quot;/root/image&quot;
+memory = 128
+name = &quot;guest&quot;
+vcpus = 1
+disk = [ &#39;phy:/dev/loop0,xvda,w&#39; ]
+extra = &quot;earlyprintk=xenboot console=hvc0 root=/dev/xvda debug rw init=/bin/sh&quot;
+</pre></div>
+</div>
+<p>where, “/root/image” is a Linux zImage.</p>
+</div>
+<div class="section" id="common-domu-pitfalls">
+<h2>Common DomU Pitfalls<a class="headerlink" href="#common-domu-pitfalls" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Enabling CONFIG_DEBUG_LL in the guest kernel configuration.</dt><dd><p>Although this option can work for dom0 if configured appropriately for the host it does not work for domU (which cannot see the host UART). The symptoms of this are that the guest console will be silent because the kernel has taken a fault accessing the early UART. This can be confirmed by using the xenctx tool (found in $PREFIX/lib/xen/bin/). The tool takes a numeric domid (not a name, use xl list or xl domid $name) and dumps the VCPU state. A PC of 0x0000000c will usually indicate that an early trap has occurred.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

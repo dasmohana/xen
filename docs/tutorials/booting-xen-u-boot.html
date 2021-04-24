@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Booting Xen from U-Boot &mdash; The Xen Project unknown version documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Building Xen on Arm" href="building-xen-arm.html" />
+    <link rel="prev" title="Requirements" href="running-xen-on-arm/requirements.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> The Xen Project
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                unknown version
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Introduction to Xen</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/architecture.html">Xen Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/features/index.html">Features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="running-xen-on-arm/arndale.html">Xen Arm with Virtualization Extensions/Arndale</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-xen-on-arm/midway.html">Xen Arm with Virtualization Extensions/Midway</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-xen-on-arm/odroid.html">Xen Arm with Virtualization Extensions/OdroidXU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-xen-on-arm/qemu.html">Xen Arm with Virtualization Extensions/qemu-system-aarch64</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-xen-on-arm/requirements.html">Requirements</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Booting Xen from U-Boot</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command-lines">Command Lines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-multiple-domains-directly-from-xen">Creating Multiple Domains directly from Xen</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#device-assignment">Device Assignment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="building-xen-arm.html">Building Xen on Arm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure-networking.html">Configuring Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reduce-latency.html">Reducing Latency</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How-to Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/code-coverage.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how-to/how-xen-boots.html">How Xen Boots</a></li>
+</ul>
+<p class="caption"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html">Hypercall ABI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/hypercall-abi.html#hypercall-page">Hypercall Page</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/imagebuilder.html">ImageBuilder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/xen-arm-debug.html">Xen Arm Debug Hypercalls</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Glossary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FAQ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Contributing to the Xen Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/contribute-xen.html">Contributing to Xen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute-xen/submit-patch.html">Submitting Patches to Xen</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Xen Project</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Booting Xen from U-Boot</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/tutorials/booting-xen-u-boot.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="booting-xen-from-u-boot">
+<h1>Booting Xen from U-Boot<a class="headerlink" href="#booting-xen-from-u-boot" title="Permalink to this headline">¶</a></h1>
+<p>Booting Xen from U-Boot requires:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Loading all the required binaries, manually specifying the loading address for each of them making sure they do not overlap</dt><dd><ul>
+<li><p>Xen, Dom0 kernel, Dom0 ramdisk, device tree binary, any Dom0-less DomUs kernels, ramdisk and partial dtbs for passthrough</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Adding relevant nodes to device tree</dt><dd><ul>
+<li><p>the Dom0 kernel and ramdisk loading addresses need to be specified in device tree under <cite>/chosen</cite></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Xen is passed the dom0 kernel and initrd via a reference in the <cite>/chosen</cite> node of the device tree.</p>
+<p>Each node contains the following properties:</p>
+<ul>
+<li><dl>
+<dt>compatible</dt><dd><p>Must always include at least the generic compatiblity string:</p>
+<blockquote>
+<div><blockquote>
+<div><p>“multiboot,module”</p>
+</div></blockquote>
+<p>Optionally a more specific compatible string may be used in addition to the above. One of:</p>
+<ul class="simple">
+<li><p>“multiboot,kernel”    – the dom0 kernel</p></li>
+<li><p>“multiboot,ramdisk”   – the dom0 ramdisk</p></li>
+<li><p>“xen,xsm-policy”      – XSM policy blob</p></li>
+</ul>
+<p>It is normally recommended to include a more specific compatible string (if one applies) in addition to the generic string (which must always be present).</p>
+<p>Xen will assume that the first module which lacks a more specific compatible string is a “multiboot,kernel”.</p>
+<p>Xen will examine each module, starting from the second module that lacks a specific compatible string.  Xen will check each such module for the XSM Magic number:</p>
+<ul class="simple">
+<li><p>For a module which has the XSM Magic number: it will be treated by Xen as if its compatible string was “xen,xsm-policy”;</p></li>
+<li><p>For a module which does not have the XSM Magic: the second module lacking a compatible string will be treated by Xen as if its compatible string was “multiboot,ramdisk”; for the third and subsequent modules which lack a specific compatible string, Xen will not apply any special treatment.</p></li>
+</ul>
+<p>This means if the ramdisk module is present and does not have the compatible string “multiboot,ramdisk”, then it must always be the second module.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This XSM Magic detection behavior was introduced by Xen 4.7. Xen 4.6 (and downwards) still requires the XSM module to have the compatible string “xen,xsm-policy”.</p>
+</div>
+<p>Xen 4.4 supported a different set of legacy compatible strings which remain supported such that systems supporting both 4.4
+and later can use a single DTB.</p>
+<ul class="simple">
+<li><p>“xen,multiboot-module” equivalent to “multiboot,module”</p></li>
+<li><p>“xen,linux-zimage”     equivalent to “multiboot,kernel”</p></li>
+<li><p>“xen,linux-initrd”     equivalent to “multiboot,ramdisk”</p></li>
+</ul>
+<p>For compatibility with Xen 4.4 the more specific “xen,linux-<a href="#id1"><span class="problematic" id="id2">*</span></a>” names are non-optional and must be included.</p>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>reg</dt><dd><p>Specifies the physical address of the module in RAM and the length of the module.</p>
+</dd>
+</dl>
+</li>
+<li><p>bootargs (optional)</p>
+<blockquote>
+<div><p>Command line associated with this module. See below for the priority of this field vs. other mechanisms of specifying the bootargs for the kernel.</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>A boot module of unspecified type:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>module@0xc0000000 {
+    compatible = &quot;multiboot,module&quot;;
+    reg = &lt;0xc0000000 0x1234&gt;;
+    bootargs = &quot;...&quot;;
+};
+</pre></div>
+</div>
+<p>A boot module containing a ramdisk:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>module@0xd0000000 {
+    compatible = &quot;multiboot,ramdisk&quot;, &quot;multiboot,module&quot;;
+    reg = &lt;0xd0000000 0x5678&gt;;
+};
+</pre></div>
+</div>
+<p>The previous examples are compatible with Xen 4.5+ only.</p>
+<p>To be compatible with Xen 4.4 as well use the legacy names:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>module@0xd0000000 {
+    compatible = &quot;xen,linux-initrd&quot;, &quot;xen,multiboot-module&quot;;
+    reg = &lt;0xd0000000 0x5678&gt;;
+};
+</pre></div>
+</div>
+</div>
+<div class="section" id="command-lines">
+<h2>Command Lines<a class="headerlink" href="#command-lines" title="Permalink to this headline">¶</a></h2>
+<p>Xen also checks for properties directly under /chosen to find suitable command lines for Xen and Dom0. The logic is the following:</p>
+<ul class="simple">
+<li><p>If xen,xen-bootargs is present, it will be used for Xen.</p></li>
+<li><p>If xen,dom0-bootargs is present, it will be used for Dom0.</p></li>
+<li><p>If xen,xen-bootargs is _not_ present, but xen,dom0-bootargs is, bootargs will be used for Xen.</p></li>
+<li><p>If a kernel boot module is present and has a bootargs property then the top-level bootargs will used for Xen.</p></li>
+<li><p>If no Xen specific properties are present, bootargs is for Dom0.</p></li>
+<li><p>If xen,xen-bootargs is present, but xen,dom0-bootargs is missing, bootargs will be used for Dom0.</p></li>
+</ul>
+<p>Most of these cases is to make booting with Xen-unaware bootloaders easier. For those you would hardcode the Xen commandline in the DTB under <cite>/chosen/xen,xen-bootargs</cite> and would let the bootloader set the Dom0 command line by writing bootargs (as for native Linux).</p>
+<p>A Xen-aware bootloader would set xen,xen-bootargs for Xen, xen,dom0-bootargs for Dom0 and bootargs for native Linux.</p>
+<div class="section" id="creating-multiple-domains-directly-from-xen">
+<h3>Creating Multiple Domains directly from Xen<a class="headerlink" href="#creating-multiple-domains-directly-from-xen" title="Permalink to this headline">¶</a></h3>
+<p>It is possible to have Xen create other domains, in addition to dom0, out of the information provided via device tree. A kernel and initrd (optional) need to be specified for each guest.</p>
+<p>For each domain to be created there needs to be one node under <cite>/chosen</cite> with the following properties:</p>
+<ul>
+<li><p>compatible</p>
+<blockquote>
+<div><p>For domUs: “xen,domain”</p>
+</div></blockquote>
+</li>
+<li><p>memory</p>
+<blockquote>
+<div><p>A 64-bit integer specifying the amount of kilobytes of RAM to allocate to the guest.</p>
+</div></blockquote>
+</li>
+<li><p>cpus</p>
+<blockquote>
+<div><p>An integer specifying the number of vcpus to allocate to the guest.</p>
+</div></blockquote>
+</li>
+<li><p>vpl011</p>
+<blockquote>
+<div><p>An empty property to enable/disable a virtual pl011 for the guest to use. The virtual pl011 uses SPI number 0 (see GUEST_VPL011_SPI). Please note that the SPI used for the virtual pl011 could clash with the physical SPI of a physical device assigned to the guest.</p>
+</div></blockquote>
+</li>
+<li><p>nr_spis</p>
+<blockquote>
+<div><p>Optional. A 32-bit integer specifying the number of SPIs (Shared Peripheral Interrupts) to allocate for the domain. If nr_spis is missing, the max number of SPIs supported by the physical GIC is used, or GUEST_VPL011_SPI+1 if vpl011 is enabled, whichever is greater.</p>
+</div></blockquote>
+</li>
+<li><p>#address-cells and #size-cells</p>
+<blockquote>
+<div><p>Both #address-cells and #size-cells need to be specified because both sub-nodes (described shortly) have reg properties.</p>
+<p>Under the “xen,domain” compatible node, one or more sub-nodes are present
+for the DomU kernel and ramdisk.</p>
+</div></blockquote>
+</li>
+</ul>
+<p>The kernel sub-node has the following properties:</p>
+<ul>
+<li><p>compatible</p>
+<blockquote>
+<div><p>“multiboot,kernel”, “multiboot,module”</p>
+</div></blockquote>
+</li>
+<li><p>reg</p>
+<blockquote>
+<div><p>Specifies the physical address of the kernel in RAM and its length.</p>
+</div></blockquote>
+</li>
+<li><p>bootargs (optional)</p>
+<blockquote>
+<div><p>Command line parameters for the guest kernel.</p>
+</div></blockquote>
+</li>
+</ul>
+<p>The ramdisk sub-node has the following properties:</p>
+<ul>
+<li><p>compatible</p>
+<blockquote>
+<div><p>“multiboot,ramdisk”, “multiboot,module”</p>
+</div></blockquote>
+</li>
+<li><p>reg</p>
+<blockquote>
+<div><p>Specifies the physical address of the ramdisk in RAM and its length.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>chosen {
+    domU1 {
+        compatible = &quot;xen,domain&quot;;
+        #address-cells = &lt;0x2&gt;;
+        #size-cells = &lt;0x1&gt;;
+        memory = &lt;0 131072&gt;;
+        cpus = &lt;2&gt;;
+        vpl011;
+
+        module@0x4a000000 {
+            compatible = &quot;multiboot,kernel&quot;, &quot;multiboot,module&quot;;
+            reg = &lt;0x0 0x4a000000 0xffffff&gt;;
+            bootargs = &quot;console=ttyAMA0 init=/bin/sh&quot;;
+        };
+
+        module@0x4b000000 {
+            compatible = &quot;multiboot,ramdisk&quot;, &quot;multiboot,module&quot;;
+            reg = &lt;0x0 0x4b000000 0xffffff&gt;;
+        };
+    };
+
+    domU2 {
+        compatible = &quot;xen,domain&quot;;
+        #address-cells = &lt;0x2&gt;;
+        #size-cells = &lt;0x1&gt;;
+        memory = &lt;0 65536&gt;;
+        cpus = &lt;1&gt;;
+
+        module@0x4c000000 {
+            compatible = &quot;multiboot,kernel&quot;, &quot;multiboot,module&quot;;
+            reg = &lt;0x0 0x4c000000 0xffffff&gt;;
+            bootargs = &quot;console=ttyAMA0 init=/bin/sh&quot;;
+        };
+
+        module@0x4d000000 {
+            compatible = &quot;multiboot,ramdisk&quot;, &quot;multiboot,module&quot;;
+            reg = &lt;0x0 0x4d000000 0xffffff&gt;;
+        };
+    };
+};
+</pre></div>
+</div>
+</div>
+<div class="section" id="device-assignment">
+<h2>Device Assignment<a class="headerlink" href="#device-assignment" title="Permalink to this headline">¶</a></h2>
+<p>Device Assignment (Passthrough) is supported by adding another module, alongside the kernel and ramdisk, with the device tree fragment corresponding to the device node to assign to the guest.</p>
+<p>The dtb sub-node should have the following properties:</p>
+<ul>
+<li><p>compatible</p>
+<blockquote>
+<div><p>“multiboot,device-tree” and “multiboot,module”</p>
+</div></blockquote>
+</li>
+<li><p>reg</p>
+<blockquote>
+<div><p>Specifies the physical address of the device tree binary fragment RAM and its length.</p>
+<p>As an example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>module@0xc000000 {
+    compatible = &quot;multiboot,device-tree&quot;, &quot;multiboot,module&quot;;
+    reg = &lt;0x0 0xc000000 0xffffff&gt;;
+};
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>The DTB fragment is loaded at 0xc000000 in the example above. It should follow the convention explained in <cite>docs/misc/arm/passthrough.txt</cite>. The DTB fragment will be added to the guest device tree, so that the guest kernel will be able to discover the device.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="building-xen-arm.html" class="btn btn-neutral float-right" title="Building Xen on Arm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="running-xen-on-arm/requirements.html" class="btn btn-neutral float-left" title="Requirements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2019, The Xen development community.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
